@@ -12,37 +12,4 @@
 
 
 
-/*.header {*/
-/*    grid-area: h;*/
-/*    background-color: lightsteelblue;*/
 
-/*}*/
-/*.header img{*/
-/*    width: 80px;*/
-/*}*/
-
-/*.nav {*/
-/*    grid-area: n;*/
-/*    background-color: cadetblue;*/
-
-/*}*/
-
-/*.content {*/
-/*    grid-area: c;*/
-/*    background-color: beige;*/
-/*}*/
-
-/*.avaDescription{*/
-/*    overflow: hidden;*/
-/*    display: grid;*/
-/*    grid-template-rows: 100px 1fr;*/
-/*    grid-template-columns: 1fr 1fr;*/
-/*    grid-gap: 10px;*/
-
-/*}*/
-
-/*.avatar{*/
-
-/*    height: 100%;*/
-/*    width: 100px;*/
-/*}*/

@@ -7,7 +7,7 @@ type MessagePropsType ={
     like: number
 }
 
-const Post = (props: MessagePropsType) => {
+export const Post = (props: MessagePropsType) => {
     console.log(props)
     return (
 
@@ -22,4 +22,3 @@ const Post = (props: MessagePropsType) => {
     )
 }
 
-export default Post;

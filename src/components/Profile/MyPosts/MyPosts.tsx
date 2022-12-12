@@ -1,21 +1,27 @@
 import React from 'react';
 
 import s from '../MyPosts/MyPosts.module.css'
-import Post from "./Post/Post";
+import {Post} from "./Post/Post";
 
 
-
-const MyPosts = () => {
+export const MyPosts = () => {
 
     return (
-        <div>
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
-            </div>
-            <Post message={'message1'} like={15}/>
-            <Post message={'message2'} like={20}/>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
 
+            </div>
+            <div className={s.posts}>
+                <Post message={'message1'} like={15}/>
+                <Post message={'message2'} like={20}/>
+            </div>
 
 
         </div>
@@ -23,4 +29,3 @@ const MyPosts = () => {
     )
 }
 
-export default MyPosts;

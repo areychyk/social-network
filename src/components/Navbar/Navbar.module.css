@@ -1,5 +1,26 @@
 .nav {
     grid-area: n;
     background-color: cadetblue;
+    padding: 10px;
 
+
+}
+
+.item{
+    margin-bottom: 15px;
+    margin-left: 15px;
+    align-items: center;
+    font-size: 20px;
+
+}
+
+.item a{
+    color: azure;
+    text-decoration: none;
+    padding-bottom: 25px;
+
+}
+
+.item a.active {
+    color: darkslategray;
 }

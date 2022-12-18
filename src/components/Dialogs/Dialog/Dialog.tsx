@@ -4,7 +4,7 @@ import React from "react";
 
 type DialogPropsType={
     name:string
-    id:string
+    id:number
 }
 export const Dialog =(props:DialogPropsType)=>{
     return(

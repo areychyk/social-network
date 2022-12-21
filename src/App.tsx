@@ -10,18 +10,49 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 
-function App() {
+export type DialogsDataType = {
+    id: number
+    name: string
+}
+export type MessageDataType = {
+    id: number
+    message: string
+}
+export type PostDataType = {
+    id: number
+    message: string
+    like: number
+}
+
+
+export type PostPropsType={
+    post:PostDataType[]
+    dialogs:DialogsDataType[]
+    messageData:MessageDataType[]
+}
+
+
+
+
+function App(props:PostPropsType) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path={'/profile'} component={Profile}/>
-                    <Route path={'/dialogs'} component={Dialogs}/>
-                    <Route path={'/news'} component={News}/>
-                    <Route path={'/music'} component={Music}/>
-                    <Route path={'/settings'} component={Settings}/>
+                    {/*<Route path={'/profile'} component={Profile}/>*/}
+                    {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
+                    {/*<Route path={'/news'} component={News}/>*/}
+                    {/*<Route path={'/music'} component={Music}/>*/}
+                    {/*<Route path={'/settings'} component={Settings}/>*/}
+
+                    <Route path={'/profile'} render={()=><Profile post={props.post}/>}/>
+                    <Route path={'/dialogs'} render={()=><Dialogs dialogs={props.dialogs} messageData={props.messageData}/>}/>
+                    <Route path={'/news'} render={()=><News/>}/>
+                    <Route path={'/music'} render={()=><Music/>}/>
+                    <Route path={'/settings'} render={()=><Settings/>}/>
+
                 </div>
 
             </div>

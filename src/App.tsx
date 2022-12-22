@@ -25,16 +25,32 @@ export type PostDataType = {
 }
 
 
-export type PostPropsType={
+export type PropsTypeProfile ={
     post:PostDataType[]
+}
+export type PropsTypeMessage ={
     dialogs:DialogsDataType[]
     messageData:MessageDataType[]
+}
+
+type StatePropsTypeInState={
+    profilePage:PropsTypeProfile
+    dialogsPage:PropsTypeMessage
+
+}
+
+
+
+type StatePropsType={
+
+   state:StatePropsTypeInState
 }
 
 
 
 
-function App(props:PostPropsType) {
+function App(props:StatePropsType) {
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -47,8 +63,11 @@ function App(props:PostPropsType) {
                     {/*<Route path={'/music'} component={Music}/>*/}
                     {/*<Route path={'/settings'} component={Settings}/>*/}
 
-                    <Route path={'/profile'} render={()=><Profile post={props.post}/>}/>
-                    <Route path={'/dialogs'} render={()=><Dialogs dialogs={props.dialogs} messageData={props.messageData}/>}/>
+                    <Route path={'/profile'} render={()=><Profile post={props.state.profilePage.post}/>}/>
+                    <Route path={'/dialogs'} render={()=><Dialogs
+                        dialogs={props.state.dialogsPage.dialogs}
+                        messageData={props.state.dialogsPage.messageData}
+                    />}/>
                     <Route path={'/news'} render={()=><News/>}/>
                     <Route path={'/music'} render={()=><Music/>}/>
                     <Route path={'/settings'} render={()=><Settings/>}/>

@@ -1,14 +1,25 @@
 
-
-.dialog a{
+.dialog a {
     text-decoration: none;
     color: dimgrey;
+    margin-left: 5px;
+
 
 }
 
 .dialog {
-
+    display: flex;
     margin-bottom: 7px;
+    justify-content: start;
+    align-items: center;
+
+
+}
+
+.dialog img {
+
+    width: 45px;
+    border-radius: 50%;
 
 }
 

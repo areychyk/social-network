@@ -9,42 +9,43 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {StatePropsType} from "./redux/state";
 
-export type DialogsDataType = {
-    id: number
-    name: string
-}
-export type MessageDataType = {
-    id: number
-    message: string
-}
-export type PostDataType = {
-    id: number
-    message: string
-    like: number
-}
-
-
-export type PropsTypeProfile ={
-    post:PostDataType[]
-}
-export type PropsTypeMessage ={
-    dialogs:DialogsDataType[]
-    messageData:MessageDataType[]
-}
-
-type StatePropsTypeInState={
-    profilePage:PropsTypeProfile
-    dialogsPage:PropsTypeMessage
-
-}
-
-
-
-type StatePropsType={
-
-   state:StatePropsTypeInState
-}
+// export type DialogsDataType = {
+//     id: number
+//     name: string
+// }
+// export type MessageDataType = {
+//     id: number
+//     message: string
+// }
+// export type PostDataType = {
+//     id: number
+//     message: string
+//     like: number
+// }
+//
+//
+// export type PropsTypeProfile ={
+//     post:PostDataType[]
+// }
+// export type PropsTypeMessage ={
+//     dialogs:DialogsDataType[]
+//     messageData:MessageDataType[]
+// }
+//
+// type StatePropsTypeInState={
+//     profilePage:PropsTypeProfile
+//     dialogsPage:PropsTypeMessage
+//
+// }
+//
+//
+//
+// type StatePropsType={
+//
+//    state:StatePropsTypeInState
+// }
 
 
 
@@ -52,7 +53,7 @@ type StatePropsType={
 function App(props:StatePropsType) {
 
     return (
-        <BrowserRouter>
+        // <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -63,7 +64,7 @@ function App(props:StatePropsType) {
                     {/*<Route path={'/music'} component={Music}/>*/}
                     {/*<Route path={'/settings'} component={Settings}/>*/}
 
-                    <Route path={'/profile'} render={()=><Profile post={props.state.profilePage.post}/>}/>
+                    <Route path={'/profile'} render={()=><Profile post={props.state.profilePage.post} addPost={props.addPost}/>}/>
                     <Route path={'/dialogs'} render={()=><Dialogs
                         dialogs={props.state.dialogsPage.dialogs}
                         messageData={props.state.dialogsPage.messageData}
@@ -75,7 +76,7 @@ function App(props:StatePropsType) {
                 </div>
 
             </div>
-        </BrowserRouter>
+        // </BrowserRouter>
     );
 
 }

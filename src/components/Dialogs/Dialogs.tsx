@@ -3,7 +3,8 @@ import s from '../Dialogs/Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsDataType, MessageDataType} from "../../App";
+import {DialogsDataType, MessageDataType} from "../../redux/state";
+
 
 
 export type PostPropsType={

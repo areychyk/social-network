@@ -8,7 +8,7 @@ type MessagePropsType ={
 }
 
 export const Post = (props: MessagePropsType) => {
-    console.log(props)
+
     return (
 
         <div className={s.item}>

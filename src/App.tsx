@@ -4,12 +4,12 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import s from "./components/Profile/Profile.module.css";
+
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {StatePropsType} from "./redux/state";
+import {StatePropsType, updateNewPostText} from "./redux/state";
 
 // export type DialogsDataType = {
 //     id: number
@@ -64,7 +64,12 @@ function App(props:StatePropsType) {
                     {/*<Route path={'/music'} component={Music}/>*/}
                     {/*<Route path={'/settings'} component={Settings}/>*/}
 
-                    <Route path={'/profile'} render={()=><Profile post={props.state.profilePage.post} addPost={props.addPost}/>}/>
+                    <Route path={'/profile'} render={()=><Profile
+                        post={props.state.profilePage.post}
+                        addPost={props.addPost}
+                        newPostText={props.state.profilePage.newPostText}
+                        updateNewPostText={props.updateNewPostText}
+                    />}/>
                     <Route path={'/dialogs'} render={()=><Dialogs
                         dialogs={props.state.dialogsPage.dialogs}
                         messageData={props.state.dialogsPage.messageData}

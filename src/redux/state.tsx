@@ -1,26 +1,30 @@
 
-
-
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = (state:StatePropsTypeInState) => {
+    console.log('123')
+    
+}
 
 export type DialogsDataType = {
     id: number
     name: string
 }
+
 export type MessageDataType = {
     id: number
     message: string
 }
+
 export type PostDataType = {
     id: number
     message: string
     like: number
 }
 
-
 export type PropsTypeProfile ={
     post:PostDataType[]
+    newPostText:string
 }
+
 export type PropsTypeMessage ={
     dialogs:DialogsDataType[]
     messageData:MessageDataType[]
@@ -35,14 +39,13 @@ export type StatePropsTypeInState={
 
 }
 
-
-
 export type StatePropsType={
 
     state:StatePropsTypeInState
-    addPost:(postMessage:string)=>void
-}
+    addPost:()=>void
+    updateNewPostText:(newPostText:string)=>void
 
+}
 
 export let state:StatePropsTypeInState={
     profilePage: {
@@ -52,6 +55,7 @@ export let state:StatePropsTypeInState={
             {id: 3, message: "message3", like: 21},
 
         ],
+        newPostText:"123",
     },
     dialogsPage:{
         messageData : [
@@ -76,9 +80,20 @@ export let state:StatePropsTypeInState={
 
 }
 
-
-export const AddPost=(postMessage:string)=>{
-    const newPost={id: state.profilePage.post.length+1, message: postMessage, like: 0};
+export const AddPost=()=>{
+    const newPost={id: state.profilePage.post.length+1, message: state.profilePage.newPostText, like: 0};
     state.profilePage.post.push(newPost)
+    state.profilePage.newPostText=''
     rerenderEntireTree(state)
+}
+
+export const updateNewPostText=(newPostText:string)=>{
+
+    state.profilePage.newPostText= newPostText
+    rerenderEntireTree(state)
+}
+
+export const subscribe = (observer:(state:StatePropsTypeInState)=>void) => {
+    rerenderEntireTree=observer
+    
 }

@@ -24,6 +24,8 @@ export const MyPosts = (props: PostPropsType) => {
     const AddPost = () => {
 
         props.addPost();
+
+        // props.updateNewPostText('')
         // props.updateNewPostText('') занулим в state
 
 
@@ -32,6 +34,7 @@ export const MyPosts = (props: PostPropsType) => {
     const onPostChange = () => {
         if (newPostElement.current?.value) {
             let text = newPostElement.current.value
+            // console.log(text)
             props.updateNewPostText(text);
 
         }

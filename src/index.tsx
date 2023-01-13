@@ -17,8 +17,8 @@ const rerenderEntireTree = (state:StatePropsTypeInState) => {
         <BrowserRouter>
             <App
                 state={state}
-                addPost={store.addPost.bind(store)}
-                updateNewPostText={store.updateNewPostText.bind(store)}
+                dispatch={store.dispatch.bind(store)}
+
             />,
         </BrowserRouter>,
         document.getElementById('root'));
@@ -30,3 +30,11 @@ const rerenderEntireTree = (state:StatePropsTypeInState) => {
 rerenderEntireTree(store.getState())
 
 store.subscribe(rerenderEntireTree)
+
+
+
+// <App
+// state={state}
+// addPost={store.addPost.bind(store)}
+// updateNewPostText={store.updateNewPostText.bind(store)}
+// />,

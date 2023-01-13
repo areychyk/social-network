@@ -2,28 +2,29 @@ import React from 'react';
 
 import s from '../MyPosts/MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostDataType} from "../../../redux/state";
+import {addPostActionCreator, PostDataType, updateNewPostTextActionCreator} from "../../../redux/state";
 
 
 
 type PostPropsType = {
-    post: PostDataType[]
-    addPost: () => void
+    posts: PostDataType[]
+    dispatch: any
     newPostText: string
-    updateNewPostText: (newPostText: string) => void
+    // updateNewPostText: (newPostText: string) => void
 
 }
 
 
+
 export const MyPosts = (props: PostPropsType) => {
 
-    let postElement = props.post.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
+    let postElement = props.posts.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const AddPost = () => {
 
-        props.addPost();
+        props.dispatch(addPostActionCreator());
 
         // props.updateNewPostText('')
         // props.updateNewPostText('') занулим в state
@@ -35,7 +36,10 @@ export const MyPosts = (props: PostPropsType) => {
         if (newPostElement.current?.value) {
             let text = newPostElement.current.value
             // console.log(text)
-            props.updateNewPostText(text);
+            // let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+            let action = updateNewPostTextActionCreator(text)
+            props.dispatch(action);
+            // props.updateNewPostText(text);
 
         }
     }

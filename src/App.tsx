@@ -9,7 +9,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {StatePropsType} from "./redux/state";
+import {PropsTypeMessage, PropsTypeProfile, SidebarType} from "./redux/state";
+
 
 // export type DialogsDataType = {
 //     id: number
@@ -46,7 +47,19 @@ import {StatePropsType} from "./redux/state";
 //
 //    state:StatePropsTypeInState
 // }
+export type StatePropsTypeInState={
+    profilePage:PropsTypeProfile
+    dialogsPage:PropsTypeMessage
+    sidebar:SidebarType
 
+}
+
+ type StatePropsType={
+    state:StatePropsTypeInState
+     dispatch:any
+
+
+}
 
 
 
@@ -65,10 +78,10 @@ function App(props:StatePropsType) {
                     {/*<Route path={'/settings'} component={Settings}/>*/}
 
                     <Route path={'/profile'} render={()=><Profile
-                        post={props.state.profilePage.post}
-                        addPost={props.addPost}
-                        newPostText={props.state.profilePage.newPostText}
-                        updateNewPostText={props.updateNewPostText}
+                        profilePage={props.state.profilePage}
+                        dispatch={props.dispatch}
+                        // newPostText={props.state.profilePage.newPostText}
+
                     />}/>
                     <Route path={'/dialogs'} render={()=><Dialogs
                         dialogs={props.state.dialogsPage.dialogs}

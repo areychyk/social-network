@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 
 export let store:StorePropsType={
     _state:{
@@ -35,29 +38,63 @@ export let store:StorePropsType={
     _callSubscriber  (state)  {
         console.log('change')
     },
-    addPost(){
-        let newPost={id: this._state.profilePage.post.length+1, message: this._state.profilePage.newPostText, like: 0};
 
-        this._state.profilePage.post.push(newPost)
-        this._state.profilePage.newPostText=''
-        this._callSubscriber(this._state)
-        console.log("12")
-    },
-    updateNewPostText (newPostText){
-
-        this._state.profilePage.newPostText= newPostText
-        this._callSubscriber(this._state)
-    },
     subscribe (observer) {
         this._callSubscriber=observer
 
     },
     getState(){
         return this._state
+    },
+
+    // addPost(){
+    //     let newPost={id: this._state.profilePage.post.length+1, message: this._state.profilePage.newPostText, like: 0};
+    //
+    //     this._state.profilePage.post.push(newPost)
+    //     this._state.profilePage.newPostText=''
+    //     this._callSubscriber(this._state)
+    //     console.log("12")
+    // },
+
+    // updateNewPostText (newPostText){
+    //
+    //     this._state.profilePage.newPostText= newPostText
+    //     this._callSubscriber(this._state)
+    // },
+
+    dispatch(action){
+        if(action.type === ADD_POST){
+            let newPost={
+                id: this._state.profilePage.post.length+1,
+                message: this._state.profilePage.newPostText,
+                like: 0
+            };
+
+            this._state.profilePage.post.push(newPost)
+            this._state.profilePage.newPostText=''
+            this._callSubscriber(this._state)
+            console.log("12")
+
+        }else {
+
+            if(action.type === UPDATE_NEW_POST_TEXT){
+                        this._state.profilePage.newPostText= action.newText
+                        this._callSubscriber(this._state)
+
+
+                    }
+        }
+
     }
 
-
 }
+
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+
+
+export const updateNewPostTextActionCreator = (text:string) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+
 
 
 // let rerenderEntireTree = (state:StatePropsTypeInState) => {
@@ -68,10 +105,15 @@ export let store:StorePropsType={
 export type StorePropsType={
     _state:StatePropsTypeInState,
     _callSubscriber:(state:StatePropsTypeInState)=>void
-    addPost:()=>void
-    updateNewPostText:(newPostText:string)=>void
+
     subscribe:(observer:(state:StatePropsTypeInState)=>void)=>void
     getState:()=>StatePropsTypeInState
+
+    // addPost:()=>void
+    // updateNewPostText:(newPostText:string)=>void
+
+    dispatch:(action:any)=>void
+
 }
 
 export type DialogsDataType = {

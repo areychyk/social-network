@@ -3,12 +3,12 @@ import React from 'react';
 import s from '../Profile/Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PropsTypeProfile} from "../../redux/state";
+import {ActionsType, PropsTypeProfile} from "../../redux/state";
 
 
 type PostPropsType = {
     profilePage: PropsTypeProfile
-    dispatch: any
+    dispatch: (action: ActionsType) => void
 
 
 }

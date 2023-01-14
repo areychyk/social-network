@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {KeyboardEvent} from 'react';
 
 import s from '../MyPosts/MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {addPostActionCreator, PostDataType, updateNewPostTextActionCreator} from "../../../redux/state";
+import {ActionsType, PostDataType, } from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 
 
 type PostPropsType = {
     posts: PostDataType[]
-    dispatch: any
+    dispatch: (action: ActionsType) => void
     newPostText: string
     // updateNewPostText: (newPostText: string) => void
 
@@ -44,13 +45,24 @@ export const MyPosts = (props: PostPropsType) => {
         }
     }
 
+    const AddPostKeyDown = (event:KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === "Enter") {
+            AddPost()
+        }
+    }
+
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+                    <textarea onChange={onPostChange}
+                              ref={newPostElement}
+                              value={props.newPostText}
+                              placeholder='Enter your post'
+                              onKeyDown={AddPostKeyDown}
+                    />
                 </div>
                 <div>
                     <button onClick={AddPost}>Add post</button>

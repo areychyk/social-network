@@ -17,6 +17,7 @@ const rerenderEntireTree = (state:StatePropsTypeInState) => {
         <BrowserRouter>
             <App
                 state={state}
+                store={store}
                 dispatch={store.dispatch.bind(store)}
 
             />,

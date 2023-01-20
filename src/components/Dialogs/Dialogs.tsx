@@ -10,7 +10,7 @@ import {
     PropsTypeMessage,
     StorePropsType,
 
-} from "../../redux/state";
+} from "../../redux/store";
 import {sendMessageActionCreator, updateMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 

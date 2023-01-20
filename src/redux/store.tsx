@@ -110,14 +110,13 @@ export type UpdateNewPostTextActionType = {
     newText: string
 
 }
-
-export type SendMessageActionType = {
-    type: 'SEND-MESSAGE'
-}
 export type UpdateNewMessageBodyActionType = {
     type: 'UPDATE-NEW-MESSAGE-BODY'
     body: string
 
+}
+export type SendMessageActionType = {
+    type: 'SEND-MESSAGE'
 }
 
 export type StorePropsType = {

@@ -1,16 +1,20 @@
-import {ActionsType, AddPostActionType, PropsTypeProfile, UpdateNewPostTextActionType} from "./state";
+import {ActionsType, AddPostActionType, PropsTypeProfile, UpdateNewPostTextActionType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+let initialState={
+        post: [
+            {id: 1, message: "message1", like: 15},
+            {id: 2, message: "message2", like: 20},
+            {id: 3, message: "message3", like: 21},
 
-export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
-export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-})
+        ],
+        newPostText: "",
+    };
 
-export const profileReducer = (state: PropsTypeProfile, action: ActionsType) => {
+
+export const profileReducer = (state: PropsTypeProfile=initialState, action: ActionsType) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -32,3 +36,10 @@ export const profileReducer = (state: PropsTypeProfile, action: ActionsType) => 
 
 
 }
+
+
+export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
+export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+})

@@ -3,7 +3,7 @@ import React from 'react';
 import s from '../Profile/Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsType, PropsTypeProfile} from "../../redux/state";
+import {ActionsType, PropsTypeProfile} from "../../redux/store";
 
 
 type PostPropsType = {
@@ -29,7 +29,7 @@ export const Profile = (props: PostPropsType) => {
                      // updateNewPostText={props.updateNewPostText}
             />
 
-            Main contentd
+            Main content
         </div>
 
     )

@@ -2,7 +2,12 @@
 // import {state, StatePropsTypeInState, subscribe} from "./redux/state";
 // import {AddPost, updateNewPostText} from "./redux/state";
 
-import {StatePropsTypeInState, store, StorePropsType} from "./redux/state";
+// import {StatePropsTypeInState, store, StorePropsType} from "./redux/store";
+
+
+import {StatePropsTypeInState} from "./redux/store";
+
+import  {store} from "./redux/redux-store";
 
 import React from 'react';
 import ReactDOM from 'react-dom';

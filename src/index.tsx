@@ -15,17 +15,20 @@ import './index.css';
 import App from './App';
 
 import {BrowserRouter} from "react-router-dom";
+import {Provider, StoreContext} from "./StoreContext";
 
 
 const rerenderEntireTree = (state:StoreType) => {
     ReactDOM.render(
         <BrowserRouter>
+            <Provider store={store}>
             <App
-                state={state}
+                // state={state}
                 store={store}
                 // dispatch={store.dispatch.bind(store)}
 
-            />,
+            />
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root'));
 }

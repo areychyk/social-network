@@ -8,9 +8,8 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 type PostPropsType = {
-    // profilePage: PropsTypeProfile
-    // dispatch: (action: ActionsType) => void
-    store: StorePropsType
+
+    // store: StorePropsType
 
 
 }
@@ -28,7 +27,7 @@ export const Profile = (props: PostPropsType) => {
             <MyPostsContainer
                 // posts={props.profilePage.post}
                 // dispatch={props.dispatch}
-                store={props.store}
+                // store={props.store}
                 // newPostText={props.profilePage.newPostText}
                 // updateNewPostText={props.updateNewPostText}
             />
@@ -39,3 +38,10 @@ export const Profile = (props: PostPropsType) => {
     )
 }
 
+// <MyPostsContainer
+//     // posts={props.profilePage.post}
+//     // dispatch={props.dispatch}
+//     store={props.store}
+//     // newPostText={props.profilePage.newPostText}
+//     // updateNewPostText={props.updateNewPostText}
+// />

@@ -24,7 +24,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type StatePropsType = {
     store: StorePropsType
-    state: StoreType
+    // state: StoreType
     // dispatch: (action: ActionsType) => void
 
 
@@ -41,11 +41,13 @@ function App(props: StatePropsType) {
 
                 <Route path={'/profile'} render={() => <Profile
                     // profilePage={props.state.profilePage}
-                    store={props.store}
+                    // store={props.store}
                     // dispatch={props.dispatch}
                 />}/>
 
-                <Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}/>}/>
+                <Route path={'/dialogs'} render={() => <DialogsContainer
+                    // store={props.store}
+                />}/>
 
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>

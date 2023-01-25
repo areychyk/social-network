@@ -1,55 +1,77 @@
-import React, {ChangeEvent,KeyboardEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 
 
 import {sendMessageActionCreator, updateMessageTextActionCreator} from "../../redux/dialogs-reducer";
-import {StorePropsType} from "../../redux/redux-store";
+import {ActionsType, StorePropsType, StoreType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../StoreContext";
+import {connect} from "react-redux";
+// import {StoreContext} from "../../StoreContext";
 
+//StoreContext
+// export type PostPropsType = {
+//     // store:StorePropsType
+//
+// }
+//
+// export const DialogsContainer = () => {
+//
+//
+//     return (
+//         <StoreContext.Consumer>{(store) => {
+//             let state = store.getState().dialogsPage
+//
+//
+//             const onSendMessageClick = () => {
+//
+//                 store.dispatch(sendMessageActionCreator())
+//             }
+//
+//
+//             const onNewMessageChange = (body: string) => {
+//
+//                 store.dispatch(updateMessageTextActionCreator(body))
+//
+//             }
+//
+//             return (
+//                 <Dialogs store={store}
+//                          updateNewMessageText={onNewMessageChange}
+//                          sendMessage={onSendMessageClick}
+//                          dialogsPage={state}
+//                 />
+//             )
+//
+//         }}</StoreContext.Consumer>
+//
+//     )
+// }
 
+//lesson 45
 
-export type PostPropsType={
-    // store:StorePropsType
+// export type PostPropsType = {
+//     store:StorePropsType
+//
+// }
 
+const mapStateToProps = (state:StoreType) => {
+    return{
+        dialogsPage:state.dialogsPage
+    }
 }
 
-export const DialogsContainer = () => {
-
-
-
-
-    return (
-        <StoreContext.Consumer>{(store)=>{
-            let state=store.getState().dialogsPage
-
-
-
-            const onSendMessageClick = () => {
-
-                store.dispatch(sendMessageActionCreator())
-            }
-
-
-
-
-            const onNewMessageChange = (body:string) => {
-
-                store.dispatch(updateMessageTextActionCreator(body))
-
-            }
-
-            return (
-                <Dialogs store={store}
-                         updateNewMessageText={onNewMessageChange}
-                         sendMessage={onSendMessageClick}
-                         dialogsPage={state}
-                />
-            )
-
-        }}</StoreContext.Consumer>
-
-    )
+const mapDispatchToProps = (dispatch:(action: ActionsType) => void) => {
+return {
+    updateNewMessageText:(body:string)=>{
+        dispatch(updateMessageTextActionCreator(body))
+    },
+    sendMessage:()=>{
+        dispatch(sendMessageActionCreator())
+    }
 }
+}
+export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+
+
 
 //lesson 43 store прокидываем через пропсы
 // import React, {ChangeEvent,KeyboardEvent} from 'react';

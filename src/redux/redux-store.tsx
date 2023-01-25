@@ -75,5 +75,5 @@ let reducers = combineReducers({
 export type StoreType=ReturnType<typeof reducers>
 
 
-export let store:StorePropsType = createStore(reducers);
+export let store = createStore(reducers);
 console.log(store)

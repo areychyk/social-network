@@ -46,7 +46,7 @@ export const dialogsReducer = (state: PropsTypeMessage=initialState, action: Act
     return state
 }
 
-export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
+export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE} as const)
 export const updateMessageTextActionCreator = (text: string): UpdateNewMessageBodyActionType => ({
     type: UPDATE_NEW_MESSAGE_BODY,
     body: text

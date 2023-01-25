@@ -10,7 +10,7 @@ import {PropsTypeMessage, StorePropsType} from "../../redux/redux-store";
 
 
 export type PostPropsType={
-    store:StorePropsType
+    // store:StorePropsType
     updateNewMessageText:(body:string)=>void
     sendMessage:()=>void
     dialogsPage:PropsTypeMessage

@@ -23,7 +23,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 type StatePropsType = {
-    store: StorePropsType
+    // store: StorePropsType
     // state: StoreType
     // dispatch: (action: ActionsType) => void
 

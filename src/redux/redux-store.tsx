@@ -3,6 +3,7 @@ import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
+import {FollowActionType, SetUsersActionType, UnfollowActionType, usersReducer} from "./users-reducer";
 
 export type StorePropsType = {
     subscribe: (observer: (state: StoreType) => void) => void
@@ -15,6 +16,9 @@ export type ActionsType =
     | UpdateNewPostTextActionType
     | UpdateNewMessageBodyActionType
     | SendMessageActionType
+    | FollowActionType
+    | UnfollowActionType
+    | SetUsersActionType
 
 
 export type AddPostActionType = {
@@ -66,13 +70,14 @@ export type MessageDataType = {
 export type SidebarType = {}
 
 let reducers = combineReducers({
-    profilePage:profileReducer,
-    dialogsPage:dialogsReducer,
-    sidebar:sidebarReducer
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    sidebar: sidebarReducer,
+    usersPage:usersReducer
 
 });
 
-export type StoreType=ReturnType<typeof reducers>
+export type StoreType = ReturnType<typeof reducers>
 
 
 export let store = createStore(reducers);

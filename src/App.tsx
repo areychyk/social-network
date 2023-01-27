@@ -20,6 +20,8 @@ import {
 } from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
+import {UsersContainer} from "./components/Users/UsersContainer";
+
 
 
 type StatePropsType = {
@@ -48,6 +50,8 @@ function App(props: StatePropsType) {
                 <Route path={'/dialogs'} render={() => <DialogsContainer
                     // store={props.store}
                 />}/>
+
+                <Route path={'/users'} render={() => <UsersContainer/>}/>
 
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>

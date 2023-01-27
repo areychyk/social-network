@@ -3,18 +3,18 @@ import {ActionsType, AddPostActionType, PropsTypeProfile, UpdateNewPostTextActio
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-let initialState={
-        post: [
-            {id: 1, message: "message1", like: 15},
-            {id: 2, message: "message2", like: 20},
-            {id: 3, message: "message3", like: 21},
+let initialState = {
+    post: [
+        {id: 1, message: "message1", like: 15},
+        {id: 2, message: "message2", like: 20},
+        {id: 3, message: "message3", like: 21},
 
-        ],
-        newPostText: "",
-    };
+    ],
+    newPostText: "",
+};
 
 
-export const profileReducer = (state: PropsTypeProfile=initialState, action: ActionsType) => {
+export const profileReducer = (state: PropsTypeProfile = initialState, action: ActionsType) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -22,13 +22,19 @@ export const profileReducer = (state: PropsTypeProfile=initialState, action: Act
                 message: state.newPostText,
                 like: 0
             };
+            return {
+                ...state,
+                post: [...state.post, newPost],
+                newPostText: '',
+            }
 
-            state.post.push(newPost)
-            state.newPostText = '';
-            return state
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return state
+            return {
+                ...state,
+                newPostText : action.newText
+            }
+
+
         default:
             return state
 

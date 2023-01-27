@@ -19,7 +19,7 @@ import {Provider} from "react-redux";
 // import {Provider, StoreContext} from "./StoreContext";
 
 
-const rerenderEntireTree = () => {
+// const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -32,16 +32,16 @@ const rerenderEntireTree = () => {
             </Provider>
         </BrowserRouter>,
         document.getElementById('root'));
-}
+// }
 
 
 
 
-rerenderEntireTree()
+// rerenderEntireTree()
 
-store.subscribe(()=>{
-    rerenderEntireTree()
-})
+// store.subscribe(()=>{
+//     rerenderEntireTree()
+// })
 
 // rerenderEntireTree(store.getState())
 //

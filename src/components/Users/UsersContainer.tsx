@@ -15,7 +15,13 @@ const mapStateToProps = (state: StoreType) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: (action: ActionsType) => void) => {
+type mapDispatchToType={
+    follow: (userID: string) => void
+    unfollow: (userID: string) => void
+    setUsers: (users: UsersPage[]) => void
+}
+
+const mapDispatchToProps = (dispatch: (action: ActionsType) => void):mapDispatchToType => {
     return {
         follow:(userID:string)=>{
             dispatch(followAC(userID))

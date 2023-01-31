@@ -3,8 +3,9 @@ import {ActionsType, StoreType} from "../../redux/redux-store";
 
 import {connect} from "react-redux";
 
-import {Users} from "./Users";
+// import {Users} from "./Users";
 import {followAC, setUsersAC, unfollowAC, UsersPage} from "../../redux/users-reducer";
+import {UsersClassComponent} from "./UsersClassComponent";
 
 
 
@@ -36,5 +37,6 @@ const mapDispatchToProps = (dispatch: (action: ActionsType) => void):mapDispatch
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+// export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassComponent);
 

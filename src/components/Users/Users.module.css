@@ -1,7 +1,22 @@
+.pageUsersBlock{
+    padding: 15px 5px;
+
+}
+
+.pageUsersBlock span{
+
+    margin: 0 5px;
+    cursor: pointer;
+
+}
+
+.selectedPage {
+    font-size: 20px;
+    color: gray;
+    font-weight: bold;
 
 
-
-
+}
 .wrapper{
     display: flex;
 }

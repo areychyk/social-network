@@ -3,7 +3,13 @@ import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
-import {FollowActionType, SetUsersActionType, UnfollowActionType, usersReducer} from "./users-reducer";
+import {
+    FollowActionType,
+    SetCurrentPageActionType, SetTotalUsersCountActionType,
+    SetUsersActionType,
+    UnfollowActionType,
+    usersReducer
+} from "./users-reducer";
 
 export type StorePropsType = {
     subscribe: (observer: (state: StoreType) => void) => void
@@ -19,6 +25,8 @@ export type ActionsType =
     | FollowActionType
     | UnfollowActionType
     | SetUsersActionType
+    | SetCurrentPageActionType
+    | SetTotalUsersCountActionType
 
 
 export type AddPostActionType = {
@@ -73,7 +81,7 @@ let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    usersPage:usersReducer
+    usersPage: usersReducer
 
 });
 
@@ -81,4 +89,4 @@ export type StoreType = ReturnType<typeof reducers>
 
 
 export let store = createStore(reducers);
-console.log(store)
+// console.log(store)

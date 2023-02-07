@@ -6,7 +6,7 @@ import {sidebarReducer} from "./sidebar-reducer";
 import {
     FollowActionType,
     SetCurrentPageActionType, SetTotalUsersCountActionType,
-    SetUsersActionType,
+    SetUsersActionType, ToggleIsFetchingActionType,
     UnfollowActionType,
     usersReducer
 } from "./users-reducer";
@@ -27,6 +27,7 @@ export type ActionsType =
     | SetUsersActionType
     | SetCurrentPageActionType
     | SetTotalUsersCountActionType
+    | ToggleIsFetchingActionType
 
 
 export type AddPostActionType = {

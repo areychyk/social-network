@@ -1,22 +1,44 @@
 import s from "./ProfileInfo.module.css";
 import React from "react";
+import {ProfileType} from "../../../redux/redux-store";
+import {Preloader} from "../../common/preloader/Preloader";
 
-export const ProfileInfo=()=>{
-    return(
-        <>
-        <div>
-            <img
-                src={'https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300'}/>
+type ProfileInfoType = {
+    profile: ProfileType | null
+}
+
+
+
+
+
+export const ProfileInfo = (props: ProfileInfoType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
+    return (
+        <div className={s.wrapper}>
+
+            <h2>{props.profile.fullName}</h2>
+            <p>Status: {props.profile.lookingForAJobDescription}</p>
+            <img src={props.profile?.photos.large}/>
+
+
+            <div className={s.avaDescription}>
+                <img className={s.avatar} src={props.profile?.photos.small}/>
+                <p>Description: {props.profile.aboutMe}</p>
+            </div>
+
+            <div className={s.contacts}>
+                <p> My contacts:</p>
+
+                <a href={'https://'+props.profile.contacts.facebook}>facebook</a>
+                <a href={'https://'+props.profile.contacts.instagram}>instagram</a>
+                <a href={'https://'+props.profile.contacts.youtube}>youtube</a>
+                <a href={'https://'+props.profile.contacts.github}>github</a>
+
+            </div>
+
+            <div className={s.lineInBottom}></div>
         </div>
-    <div className={s.avaDescription}>
-        <div>
-            <img className={s.avatar}
-                 src={'https://img.championat.com/news/big/x/s/hasbulla-magomedov_1654777118343414709.jpg'}/>
-        </div>
-        <div className={"description"}>
-            description
-        </div>
-    </div>
-        </>
     )
 }

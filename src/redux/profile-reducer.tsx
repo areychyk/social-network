@@ -1,9 +1,24 @@
-import {ActionsType, AddPostActionType, PropsTypeProfile, UpdateNewPostTextActionType} from "./redux-store";
+import {
+    ActionsType,
+    AddPostActionType,
+    ProfileType,
+    PropsTypeProfile,
+    UpdateNewPostTextActionType
+} from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE='SET-USER-PROFILE';
 
-let initialState = {
+
+export type SetUsersProfileActionType = {
+    type: 'SET-USER-PROFILE'
+    profile:ProfileType|null
+
+
+}
+
+let initialState: PropsTypeProfile = {
     post: [
         {id: 1, message: "message1", like: 15},
         {id: 2, message: "message2", like: 20},
@@ -11,10 +26,11 @@ let initialState = {
 
     ],
     newPostText: "",
+    profile: null
 };
 
 
-export const profileReducer = (state: PropsTypeProfile = initialState, action: ActionsType) => {
+export const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -34,6 +50,14 @@ export const profileReducer = (state: PropsTypeProfile = initialState, action: A
                 newPostText : action.newText
             }
 
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile:action.profile
+
+
+            }
+
 
         default:
             return state
@@ -48,4 +72,10 @@ export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
+})
+
+export const setUserProfile = (profile:ProfileType): SetUsersProfileActionType => ({
+    type: SET_USER_PROFILE,
+    profile
+
 })

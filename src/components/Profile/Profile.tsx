@@ -1,36 +1,21 @@
 import React from 'react';
-
-// import s from '../Profile/Profile.module.css'
-// import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsType, PropsTypeProfile, StorePropsType} from "../../redux/redux-store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfileType} from "../../redux/redux-store";
 
 
-type PostPropsType = {
-
-    // store: StorePropsType
+type ProfilePropsType = {
+    profile:ProfileType|null
+    setUserProfile:(profile:ProfileType)=>void
 
 
 }
 
-export const Profile = (props: PostPropsType) => {
+export const Profile = (props: ProfilePropsType) => {
 
-    // let post= [
-    //     {id: 1, message: "message1", like: 15},
-    //     {id: 2, message: "message2", like: 20},
-    //
-    // ]
-    return (
-        <div>
-            <ProfileInfo/>
-            <MyPostsContainer
-                // posts={props.profilePage.post}
-                // dispatch={props.dispatch}
-                // store={props.store}
-                // newPostText={props.profilePage.newPostText}
-                // updateNewPostText={props.updateNewPostText}
-            />
+    return (<div>
+            <ProfileInfo profile={props.profile}/>
+            <MyPostsContainer/>
 
             Main content
         </div>
@@ -38,10 +23,3 @@ export const Profile = (props: PostPropsType) => {
     )
 }
 
-// <MyPostsContainer
-//     // posts={props.profilePage.post}
-//     // dispatch={props.dispatch}
-//     store={props.store}
-//     // newPostText={props.profilePage.newPostText}
-//     // updateNewPostText={props.updateNewPostText}
-// />

@@ -3,8 +3,22 @@
 .header {
     grid-area: h;
     background-color: lightsteelblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
 }
 .header img{
     width: 80px;
+}
+
+
+.loginBlock{
+    padding-right: 45px;
+    font-size: 20px;
+}
+
+.loginBlock a{
+    color: azure;
+
 }

@@ -10,6 +10,7 @@ import {
     UnfollowActionType,
     usersReducer
 } from "./users-reducer";
+import {authReducer, SetUserAuthDataActionType} from "./auth-reducer";
 
 export type StorePropsType = {
     subscribe: (observer: (state: StoreType) => void) => void
@@ -28,7 +29,8 @@ export type ActionsType =
     | SetCurrentPageActionType
     | SetTotalUsersCountActionType
     | ToggleIsFetchingActionType
-|SetUsersProfileActionType
+    | SetUsersProfileActionType
+    | SetUserAuthDataActionType
 
 
 export type AddPostActionType = {
@@ -52,10 +54,10 @@ export type SendMessageActionType = {
 export type PropsTypeProfile = {
     post: PostDataType[]
     newPostText: string
-    profile: null| ProfileType
+    profile: null | ProfileType
 }
 
-export type ProfileType={
+export type ProfileType = {
     aboutMe: string
     contacts: {
         facebook: string
@@ -106,12 +108,13 @@ let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth:authReducer
+
 
 });
 
 export type StoreType = ReturnType<typeof reducers>
-
 
 
 export let store = createStore(reducers);

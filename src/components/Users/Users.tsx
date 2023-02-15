@@ -4,6 +4,7 @@ import s from './Users.module.css'
 
 import userPhoto from '../../assets/images/Sample_User_Icon.png'
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 export type UsersPropsType = {
@@ -13,15 +14,14 @@ export type UsersPropsType = {
     currentPage: number
     follow: (userID: string) => void
     unfollow: (userID: string) => void
-    onPageChanged:(pageNumber:number)=>void
-    setTotalUsersCount: (totalCount:number) => void
-
+    onPageChanged: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
 
 
 }
 
 
-export const Users = (props:UsersPropsType) => {
+export const Users = (props: UsersPropsType) => {
 
 
     // let pagesCount = 15;
@@ -33,17 +33,52 @@ export const Users = (props:UsersPropsType) => {
     }
 
     const MinusTenUsers = () => {
-        props.setTotalUsersCount(props.totalUsersCount-25)
+        props.setTotalUsersCount(props.totalUsersCount - 25)
     }
 
     const PlusTenUsers = () => {
-        props.setTotalUsersCount(props.totalUsersCount+25)
+        props.setTotalUsersCount(props.totalUsersCount + 25)
+
+    }
+
+    const onClickFollowHandler = (userID: string) => {
+        console.log('change follower')
+        axios
+            .post(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {}, {
+                withCredentials: true,
+                headers: {
+                    "API-KEY": "944413f4-5eb4-4767-a66d-dd54b12c9aac"
+                }
+            })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    props.follow(userID)
+                }
+            })
+
+
+    }
+    const onClickUnfollowHandler = (userID: string) => {
+        console.log('change unfollower')
+        axios
+            .delete(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {
+                withCredentials: true,
+                headers: {
+                    "API-KEY": "944413f4-5eb4-4767-a66d-dd54b12c9aac"
+                }
+            })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    props.unfollow(userID)
+                }
+            })
+
 
     }
 
     return (<div>
             <div className={s.pageUsersBlock}>
-                {props.totalUsersCount>50 &&  <button onClick={MinusTenUsers}>-5</button>}
+                {props.totalUsersCount > 50 && <button onClick={MinusTenUsers}>-5</button>}
 
 
                 {pages.map((p, index: number) => {
@@ -58,17 +93,18 @@ export const Users = (props:UsersPropsType) => {
                         >{p}</span>)
                 })}
 
-                <button  onClick={PlusTenUsers}>+5</button>
+                <button onClick={PlusTenUsers}>+5</button>
             </div>
             {props.users.map(u => {
-                    const onClickFollowHandler = () => {
-                        console.log('change follower')
-                        props.follow(u.id)
-                    }
-                    const onClickUnfollowHandler = () => {
-                        console.log('change unfollower')
-                        props.unfollow(u.id)
-                    }
+                    // const onClickFollowHandler = () => {
+                    //
+                    //     console.log('change follower')
+                    //     props.follow(u.id)
+                    // }
+                    // const onClickUnfollowHandler = () => {
+                    //     console.log('change unfollower')
+                    //     props.unfollow(u.id)
+                    // }
                     return (
                         <div key={u.id} className={s.wrapper}>
                 <span>
@@ -81,9 +117,13 @@ export const Users = (props:UsersPropsType) => {
                     <div>
                         {u.followed
                             ?
-                            <button onClick={onClickFollowHandler}>Follow</button>
+                            <button onClick={() => {
+                                onClickFollowHandler(u.id)
+                            }}>Follow</button>
                             :
-                            <button onClick={onClickUnfollowHandler}>Unfollow</button>}
+                            <button onClick={() => {
+                                onClickUnfollowHandler(u.id)
+                            }}>Unfollow</button>}
                     </div>
                 </span>
                             <div className={s.content}>

@@ -1,60 +1,70 @@
 import {ActionsType} from "./redux-store";
 
 
-export type UsersType={
-    users:UsersPage[]
-    pageSize:number
-    totalUsersCount:number
-    currentPage:number
-    isFetching:boolean
+export type UsersType = {
+    users: UsersPage[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: Array<string>
 }
 
-export type UsersPage={
-    id:string
-    followed:boolean
-    photos:{small:string,large:string }
-    name:string
-    status:string
-    location?:{city:string,country:string}
+export type UsersPage = {
+    id: string
+    followed: boolean
+    photos: { small: string, large: string }
+    name: string
+    status: string
+    location?: { city: string, country: string }
+
 }
 
 
-
-let initialState:UsersType ={
-    users:[],
-    pageSize:5,
-    totalUsersCount:50,
-    currentPage:1,
-    isFetching:false
+let initialState: UsersType = {
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 50,
+    currentPage: 1,
+    isFetching: false,
+    followingInProgress: [],
 }
 
-    // [
-    // {id:v1(), followed:false, photoURL:"https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png", fullName:"Denis", status:'hello, world', location:{city:"Minsk", country:"Belarus"}},
-    //     {id:v1(),followed:true ,photoURL:"https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png", fullName:"Dmitry", status:'hello, Dmitry', location:{city:"Moscow", country:"Russia"}},
-    //     {id:v1(),followed:false,photoURL:"https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png", fullName:"Ivan", status:'hello, Ivan', location:{city:"Kiev", country:"Ukraine"}},
-    // ]
+// [
+// {id:v1(), followed:false, photoURL:"https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png", fullName:"Denis", status:'hello, world', location:{city:"Minsk", country:"Belarus"}},
+//     {id:v1(),followed:true ,photoURL:"https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png", fullName:"Dmitry", status:'hello, Dmitry', location:{city:"Moscow", country:"Russia"}},
+//     {id:v1(),followed:false,photoURL:"https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png", fullName:"Ivan", status:'hello, Ivan', location:{city:"Kiev", country:"Ukraine"}},
+// ]
 
 export const usersReducer = (state: UsersType = initialState, action: ActionsType) => {
     switch (action.type) {
         case FOLLOW:
 
-            return {    ...state, users: state.users.map(m=>m.id===action.userID ? ({...m, followed:false}) : m)   }
+            return {...state, users: state.users.map(m => m.id === action.userID ? ({...m, followed: false}) : m)}
 
         case UNFOLLOW:
-            return  {    ...state, users: state.users.map(m=>m.id===action.userID ? ({...m, followed:true}) : m)   }
+            return {...state, users: state.users.map(m => m.id === action.userID ? ({...m, followed: true}) : m)}
 
         case SET_USERS:
-            return  {...state,users: action.users}
+            return {...state, users: action.users}
 
         case SET_CURRENT_PAGE:
-            return  {...state, currentPage:action.currentPage}
+            return {...state, currentPage: action.currentPage}
 
         case SET_TOTAL_COUNT:
-            return  {...state, totalUsersCount:action.totalCount}
+            return {...state, totalUsersCount: action.totalCount}
 
         case TOGGLE_IS_FETCHING:
-            return  {...state, isFetching:action.isFetching}
+            return {...state, isFetching: action.isFetching}
 
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress:
+                    action.followingInProgress
+                        ? [...state.followingInProgress, action.userID]
+                        : state.followingInProgress.filter(id => id !== action.userID)
+            }
 
         default:
             return state
@@ -64,28 +74,42 @@ export const usersReducer = (state: UsersType = initialState, action: ActionsTyp
 }
 
 
-const FOLLOW='FOLLOW';
-const UNFOLLOW='UNFOLLOW';
-const SET_USERS='SET-USERS';
-const SET_CURRENT_PAGE='SET-CURRENT-PAGE';
-const SET_TOTAL_COUNT='SET-TOTAL-COUNT';
-const TOGGLE_IS_FETCHING='TOGGLE-IS-FETCHING';
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const SET_TOTAL_COUNT = 'SET-TOTAL-COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
-export type FollowActionType={type: 'FOLLOW',userID:string}
-export type UnfollowActionType={type: 'UNFOLLOW',userID:string}
-export type SetUsersActionType={type: 'SET-USERS', users:UsersPage[]}
-export type SetCurrentPageActionType={type: 'SET-CURRENT-PAGE', currentPage:number}
-export type SetTotalUsersCountActionType={type: 'SET-TOTAL-COUNT', totalCount:number}
-export type ToggleIsFetchingActionType={type: 'TOGGLE-IS-FETCHING', isFetching:boolean}
+export type FollowActionType = { type: 'FOLLOW', userID: string }
+export type UnfollowActionType = { type: 'UNFOLLOW', userID: string }
+export type SetUsersActionType = { type: 'SET-USERS', users: UsersPage[] }
+export type SetCurrentPageActionType = { type: 'SET-CURRENT-PAGE', currentPage: number }
+export type SetTotalUsersCountActionType = { type: 'SET-TOTAL-COUNT', totalCount: number }
+export type ToggleIsFetchingActionType = { type: 'TOGGLE-IS-FETCHING', isFetching: boolean }
+export type ToggleIsFollowingProgressActionType = { type: 'TOGGLE-IS-FOLLOWING-PROGRESS', followingInProgress: boolean,userID:string }
 
-export const follow = (userID:string): FollowActionType => ({type: FOLLOW, userID} as const)
-export const unfollow = (userID:string): UnfollowActionType => ({type: UNFOLLOW, userID} as const)
-export const setUsers = (users:UsersPage[]): SetUsersActionType => ({type: SET_USERS, users} as const)
-export const setCurrentPage = (currentPage:number): SetCurrentPageActionType => ({type: SET_CURRENT_PAGE, currentPage} as const)
-export const setTotalUsersCount = (totalCount:number): SetTotalUsersCountActionType => ({type: SET_TOTAL_COUNT, totalCount} as const)
-export const toggleIsFetching = (isFetching:boolean): ToggleIsFetchingActionType => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
-
-
+export const follow = (userID: string): FollowActionType => ({type: FOLLOW, userID} as const)
+export const unfollow = (userID: string): UnfollowActionType => ({type: UNFOLLOW, userID} as const)
+export const setUsers = (users: UsersPage[]): SetUsersActionType => ({type: SET_USERS, users} as const)
+export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => ({
+    type: SET_CURRENT_PAGE,
+    currentPage
+} as const)
+export const setTotalUsersCount = (totalCount: number): SetTotalUsersCountActionType => ({
+    type: SET_TOTAL_COUNT,
+    totalCount
+} as const)
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching
+} as const)
+export const toggleIsFollowingProgress = (followingInProgress: boolean,userID:string): ToggleIsFollowingProgressActionType => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    followingInProgress,
+    userID
+} as const)
 
 
 // [

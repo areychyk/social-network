@@ -6,7 +6,7 @@ import {sidebarReducer} from "./sidebar-reducer";
 import {
     FollowActionType,
     SetCurrentPageActionType, SetTotalUsersCountActionType,
-    SetUsersActionType, ToggleIsFetchingActionType,
+    SetUsersActionType, ToggleIsFetchingActionType, ToggleIsFollowingProgressActionType,
     UnfollowActionType,
     usersReducer
 } from "./users-reducer";
@@ -31,6 +31,7 @@ export type ActionsType =
     | ToggleIsFetchingActionType
     | SetUsersProfileActionType
     | SetUserAuthDataActionType
+    | ToggleIsFollowingProgressActionType
 
 
 export type AddPostActionType = {
@@ -109,7 +110,7 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
-    auth:authReducer
+    auth: authReducer
 
 
 });

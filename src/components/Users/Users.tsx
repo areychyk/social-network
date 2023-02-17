@@ -4,7 +4,8 @@ import s from './Users.module.css'
 
 import userPhoto from '../../assets/images/Sample_User_Icon.png'
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+
+import {usersAPI} from "../../api/api";
 
 
 export type UsersPropsType = {
@@ -16,6 +17,8 @@ export type UsersPropsType = {
     unfollow: (userID: string) => void
     onPageChanged: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
+    toggleIsFollowingProgress: (followingInProgress: boolean, userID:string) => void
+    followingInProgress: Array<string>
 
 
 }
@@ -42,35 +45,32 @@ export const Users = (props: UsersPropsType) => {
     }
 
     const onClickFollowHandler = (userID: string) => {
-        console.log('change follower')
-        axios
-            .post(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {}, {
-                withCredentials: true,
-                headers: {
-                    "API-KEY": "944413f4-5eb4-4767-a66d-dd54b12c9aac"
-                }
-            })
+
+        props.toggleIsFollowingProgress(true,userID)
+        usersAPI.getFollow(userID)
             .then(response => {
+                console.log(response.data)
                 if (response.data.resultCode === 0) {
+
                     props.follow(userID)
                 }
+                props.toggleIsFollowingProgress(false,userID)
             })
 
 
     }
+
     const onClickUnfollowHandler = (userID: string) => {
-        console.log('change unfollower')
-        axios
-            .delete(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`, {
-                withCredentials: true,
-                headers: {
-                    "API-KEY": "944413f4-5eb4-4767-a66d-dd54b12c9aac"
-                }
-            })
+        props.toggleIsFollowingProgress(true,userID)
+        usersAPI.getUnfollow(userID)
             .then(response => {
+
+                console.log(response.data)
                 if (response.data.resultCode === 0) {
+
                     props.unfollow(userID)
                 }
+                props.toggleIsFollowingProgress(false,userID)
             })
 
 
@@ -96,15 +96,7 @@ export const Users = (props: UsersPropsType) => {
                 <button onClick={PlusTenUsers}>+5</button>
             </div>
             {props.users.map(u => {
-                    // const onClickFollowHandler = () => {
-                    //
-                    //     console.log('change follower')
-                    //     props.follow(u.id)
-                    // }
-                    // const onClickUnfollowHandler = () => {
-                    //     console.log('change unfollower')
-                    //     props.unfollow(u.id)
-                    // }
+
                     return (
                         <div key={u.id} className={s.wrapper}>
                 <span>
@@ -117,13 +109,16 @@ export const Users = (props: UsersPropsType) => {
                     <div>
                         {u.followed
                             ?
-                            <button onClick={() => {
+                            <button disabled={props.followingInProgress.some(id=>id ===u.id)} onClick={() => {
+                                onClickUnfollowHandler(u.id)
+                            }}>Unfollow</button>
+
+                            :
+                            <button disabled={props.followingInProgress.some(id=>id ===u.id)} onClick={() => {
                                 onClickFollowHandler(u.id)
                             }}>Follow</button>
-                            :
-                            <button onClick={() => {
-                                onClickUnfollowHandler(u.id)
-                            }}>Unfollow</button>}
+
+                        }
                     </div>
                 </span>
                             <div className={s.content}>

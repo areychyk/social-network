@@ -26,12 +26,12 @@ export const usersAPI = {
     },
     getFollow(userID:string){
 
-        return instance.post(`follow/${userID}`,{})
+        return instance.post(`follow/${userID}`)
 
     },
     getUnfollow(userID:string){
 
-        return instance.delete(`follow/${userID}`)
+        return instance.delete(`follow/${userID}`,{})
 
     },
 

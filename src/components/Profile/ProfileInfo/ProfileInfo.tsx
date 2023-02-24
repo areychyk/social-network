@@ -20,11 +20,11 @@ export const ProfileInfo = (props: ProfileInfoType) => {
 
             <h2>{props.profile.fullName}</h2>
             <p>Status: {props.profile.lookingForAJobDescription}</p>
-            <img src={props.profile?.photos.large}/>
+            <img src={props.profile.photos.large===null?'https://via.placeholder.com/300':props.profile.photos.large}/>
 
 
             <div className={s.avaDescription}>
-                <img className={s.avatar} src={props.profile?.photos.small}/>
+                <img className={s.avatar} src={props.profile.photos.small===null?'https://via.placeholder.com/75':props.profile.photos.small}/>
                 <p>Description: {props.profile.aboutMe}</p>
             </div>
 

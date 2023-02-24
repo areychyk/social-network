@@ -32,9 +32,10 @@ import {Provider} from "react-redux";
             </Provider>
         </BrowserRouter>,
         document.getElementById('root'));
+
+
+
 // }
-
-
 
 
 // rerenderEntireTree()
@@ -49,7 +50,6 @@ import {Provider} from "react-redux";
 //     let state=store.getState();
 //     rerenderEntireTree(state)
 // })
-
 
 // <App
 // state={state}

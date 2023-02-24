@@ -5,20 +5,19 @@ import {Header} from "./Header";
 
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
-import {authMe, setAuthUserData, UsersAuthType} from "../../redux/auth-reducer";
+import {getUserData,  UsersAuthType} from "../../redux/auth-reducer";
 
 
 type HeaderContainerPropsType={
     data:UsersAuthType
-    setAuthUserData:(id: number, login: string, email: string)=>void
-    authMe:()=>void
+    getUserData:()=>void
 }
 
 
 export class HeaderAPIContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
-        this.props.authMe()
+        this.props.getUserData()
 
         // axios
         //     .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
@@ -53,4 +52,4 @@ const mapStateToProps = (state: StoreType) => {
 }
 
 
-export const HeaderContainer = connect(mapStateToProps, {setAuthUserData,authMe})(HeaderAPIContainer)
+export const HeaderContainer = connect(mapStateToProps, {getUserData})(HeaderAPIContainer)

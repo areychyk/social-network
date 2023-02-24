@@ -5,57 +5,11 @@ import {sendMessageActionCreator, updateMessageTextActionCreator} from "../../re
 import {ActionsType, StorePropsType, StoreType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-// import {StoreContext} from "../../StoreContext";
-
-//StoreContext
-// export type PostPropsType = {
-//     // store:StorePropsType
-//
-// }
-//
-// export const DialogsContainer = () => {
-//
-//
-//     return (
-//         <StoreContext.Consumer>{(store) => {
-//             let state = store.getState().dialogsPage
-//
-//
-//             const onSendMessageClick = () => {
-//
-//                 store.dispatch(sendMessageActionCreator())
-//             }
-//
-//
-//             const onNewMessageChange = (body: string) => {
-//
-//                 store.dispatch(updateMessageTextActionCreator(body))
-//
-//             }
-//
-//             return (
-//                 <Dialogs store={store}
-//                          updateNewMessageText={onNewMessageChange}
-//                          sendMessage={onSendMessageClick}
-//                          dialogsPage={state}
-//                 />
-//             )
-//
-//         }}</StoreContext.Consumer>
-//
-//     )
-// }
-
-//lesson 45
-
-// export type PostPropsType = {
-//     store:StorePropsType
-//
-// }
 
 const mapStateToProps = (state:StoreType) => {
     return{
-        dialogsPage:state.dialogsPage
+        dialogsPage:state.dialogsPage,
+        isAuth:state.auth.isAuth
     }
 }
 
@@ -114,4 +68,55 @@ export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dial
 //                  dialogsPage={state}
 //         />
 //     )
+// }
+
+
+
+
+// import {StoreContext} from "../../StoreContext";
+
+//StoreContext
+// export type PostPropsType = {
+//     // store:StorePropsType
+//
+// }
+//
+// export const DialogsContainer = () => {
+//
+//
+//     return (
+//         <StoreContext.Consumer>{(store) => {
+//             let state = store.getState().dialogsPage
+//
+//
+//             const onSendMessageClick = () => {
+//
+//                 store.dispatch(sendMessageActionCreator())
+//             }
+//
+//
+//             const onNewMessageChange = (body: string) => {
+//
+//                 store.dispatch(updateMessageTextActionCreator(body))
+//
+//             }
+//
+//             return (
+//                 <Dialogs store={store}
+//                          updateNewMessageText={onNewMessageChange}
+//                          sendMessage={onSendMessageClick}
+//                          dialogsPage={state}
+//                 />
+//             )
+//
+//         }}</StoreContext.Consumer>
+//
+//     )
+// }
+
+//lesson 45
+
+// export type PostPropsType = {
+//     store:StorePropsType
+//
 // }

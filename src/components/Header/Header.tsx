@@ -8,7 +8,7 @@ import {UsersAuthType} from "../../redux/auth-reducer";
 
 type HeaderPropsType={
     data:UsersAuthType
-    setAuthUserData:(id: number, login: string, email: string)=>void
+
 }
 export const Header = (props:HeaderPropsType) => {
     return(<header className={s.header}>

@@ -1,6 +1,6 @@
 import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {authAPI, usersAPI} from "../api/api";
 import {toggleIsFollowingProgress, unfollowSuccess} from "./users-reducer";
 
 
@@ -8,7 +8,7 @@ export type UsersAuthType = {
     UserId: number | null
     login: string | null
     email: string | null
-    isAuth:boolean
+    isAuth: boolean
     isFetching: boolean
 }
 
@@ -17,7 +17,7 @@ let initialState: UsersAuthType = {
     UserId: null,
     login: null,
     email: null,
-    isAuth:false,
+    isAuth: false,
     isFetching: false
 }
 
@@ -29,7 +29,7 @@ export const authReducer = (state: UsersAuthType = initialState, action: Actions
             return {
                 ...state,
                 ...action.data,
-                isAuth:true
+                isAuth: true
             }
 
 
@@ -65,20 +65,19 @@ export const setAuthUserData = (UserId: number, login: string, email: string): S
 
 
 //Thunk
-export const authMe =()=>{
-    return (dispatch: Dispatch)=> {
-        usersAPI.getAuthMe()
-            .then(response => {
+export const getUserData = () => (dispatch: Dispatch) => {
+    authAPI.me()
+        .then(response => {
 
-                if (response.data.resultCode === 0) {
-                    let {id,login,email}=response.data.data
-                    dispatch(setAuthUserData(id,login,email))
-                }
+            if (response.data.resultCode === 0) {
+                let {id, login, email} = response.data.data
+                dispatch(setAuthUserData(id, login, email))
+            }
 
 
-            })
+        })
 
-    }
+
 }
 
 

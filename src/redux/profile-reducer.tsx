@@ -7,7 +7,7 @@ import {
 } from "./redux-store";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
-import {toggleIsFollowingProgress, unfollowSuccess} from "./users-reducer";
+
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -90,12 +90,9 @@ export const setUserProfile = (profile:ProfileType): SetUsersProfileActionType =
 export const getUser =(userId:string)=>{
     return (dispatch: Dispatch)=> {
 
-        let id = userId
-        if (!id) {
-            id = '10';
-        }
 
-        usersAPI.getUserProfile(id)
+
+        usersAPI.getProfile(userId)
             .then(response => {
                dispatch(setUserProfile(response.data))
             })

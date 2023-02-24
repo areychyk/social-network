@@ -7,7 +7,7 @@ import s from './Profile.module.css'
 
 type ProfilePropsType = {
     profile:ProfileType|null
-    setUserProfile:(profile:ProfileType)=>void
+
 
 
 }

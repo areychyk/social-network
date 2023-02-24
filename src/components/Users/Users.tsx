@@ -46,32 +46,33 @@ export const Users = (props: UsersPropsType) => {
 
     const onClickFollowHandler = (userID: string) => {
 
-        props.toggleIsFollowingProgress(true,userID)
-        usersAPI.getFollow(userID)
-            .then(response => {
-                console.log(response.data)
-                if (response.data.resultCode === 0) {
-
-                    props.follow(userID)
-                }
-                props.toggleIsFollowingProgress(false,userID)
-            })
-
+        // props.toggleIsFollowingProgress(true,userID)
+        // usersAPI.getFollow(userID)
+        //     .then(response => {
+        //         console.log(response.data)
+        //         if (response.data.resultCode === 0) {
+        //
+        //             props.follow(userID)
+        //         }
+        //         props.toggleIsFollowingProgress(false,userID)
+        //     })
+        props.follow(userID)
 
     }
 
     const onClickUnfollowHandler = (userID: string) => {
-        props.toggleIsFollowingProgress(true,userID)
-        usersAPI.getUnfollow(userID)
-            .then(response => {
-
-                console.log(response.data)
-                if (response.data.resultCode === 0) {
-
-                    props.unfollow(userID)
-                }
-                props.toggleIsFollowingProgress(false,userID)
-            })
+        // props.toggleIsFollowingProgress(true,userID)
+        // usersAPI.getUnfollow(userID)
+        //     .then(response => {
+        //
+        //         console.log(response.data)
+        //         if (response.data.resultCode === 0) {
+        //
+        //             props.unfollow(userID)
+        //         }
+        //         props.toggleIsFollowingProgress(false,userID)
+        //     })
+        props.unfollow(userID)
 
 
     }

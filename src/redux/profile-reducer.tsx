@@ -5,6 +5,9 @@ import {
     PropsTypeProfile,
     UpdateNewPostTextActionType
 } from "./redux-store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {toggleIsFollowingProgress, unfollowSuccess} from "./users-reducer";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -68,14 +71,34 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
 }
 
 
+//Action Create
+
 export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 })
-
 export const setUserProfile = (profile:ProfileType): SetUsersProfileActionType => ({
     type: SET_USER_PROFILE,
     profile
 
 })
+
+
+//Thunk
+
+export const getUser =(userId:string)=>{
+    return (dispatch: Dispatch)=> {
+
+        let id = userId
+        if (!id) {
+            id = '10';
+        }
+
+        usersAPI.getUserProfile(id)
+            .then(response => {
+               dispatch(setUserProfile(response.data))
+            })
+
+    }
+}

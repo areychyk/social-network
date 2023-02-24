@@ -29,11 +29,23 @@ export const usersAPI = {
         return instance.post(`follow/${userID}`)
 
     },
+
     getUnfollow(userID:string){
 
         return instance.delete(`follow/${userID}`,{})
 
     },
+
+    getAuthMe(){
+
+        return instance.get(`auth/me`)
+
+    },
+
+    getUserProfile(userID:string){
+        return instance.get(`profile/${userID}`)
+
+    }
 
 
 

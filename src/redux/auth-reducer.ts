@@ -1,4 +1,7 @@
 import {ActionsType} from "./redux-store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {toggleIsFollowingProgress, unfollowSuccess} from "./users-reducer";
 
 
 export type UsersAuthType = {
@@ -50,7 +53,7 @@ export type SetUserAuthDataActionType = {
     }
 }
 
-
+//Action Create
 export const setAuthUserData = (UserId: number, login: string, email: string): SetUserAuthDataActionType => ({
     type: SET_USER_DATA,
     data: {
@@ -59,6 +62,24 @@ export const setAuthUserData = (UserId: number, login: string, email: string): S
         email
     }
 } as const)
+
+
+//Thunk
+export const authMe =()=>{
+    return (dispatch: Dispatch)=> {
+        usersAPI.getAuthMe()
+            .then(response => {
+
+                if (response.data.resultCode === 0) {
+                    let {id,login,email}=response.data.data
+                    dispatch(setAuthUserData(id,login,email))
+                }
+
+
+            })
+
+    }
+}
 
 
 

@@ -57,7 +57,7 @@ const mapStateToProps = (state: StoreType) => ({
 export const ProfileContainer=compose<React.ComponentType>(
     connect(mapStateToProps, {getUser}),
     withRouter,
-    WithAuthRedirectComponent
+    // WithAuthRedirectComponent
 )
 (ProfileAPIContainer)
 

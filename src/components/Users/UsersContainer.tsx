@@ -20,6 +20,7 @@ import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 import {usersAPI} from "../../api/api";
 import {Dispatch} from "redux";
+import {ThunkDispatch} from "redux-thunk";
 
 
 
@@ -97,8 +98,7 @@ const mapStateToProps = (state: StoreType) => {
 }
 
 // type mapDispatchToType = {
-//     follow: (userID: string) => void
-//     unfollow: (userID: string) => void
+//
 //     setUsers: (users: UsersPage[]) => void
 //     setCurrentPage: (currentPage: number) => void
 //     setTotalUsersCount: (totalCount: number) => void
@@ -108,15 +108,10 @@ const mapStateToProps = (state: StoreType) => {
 //
 //
 // }
-
-// const mapDispatchToProps = (dispatch: any): mapDispatchToType=> {
+//
+// const mapDispatchToProps = (dispatch:AppDispatch): mapDispatchToType=> {
 //     return {
-//         follow: (userID: string) => {
-//             dispatch(follow(userID))
-//         },
-//         unfollow: (userID: string) => {
-//             dispatch(unfollow(userID))
-//         },
+//
 //         setUsers: (users: UsersPage[]) => {
 //             dispatch(setUsers(users))
 //
@@ -139,8 +134,8 @@ const mapStateToProps = (state: StoreType) => {
 //
 //     }
 // }
-
-
+//
+//
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIClassComponent);
 
 export const UsersContainer = connect(mapStateToProps, {

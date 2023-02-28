@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 
 import {profileReducer, SetUsersProfileActionType} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
@@ -117,6 +117,8 @@ let reducers = combineReducers({
 });
 
 export type StoreType = ReturnType<typeof reducers>
+// export type RootStateType = StoreType
+// export type AppDispatch = ThunkDispatch<RootStateType, ActionsType, any>
 
 
 export let store = createStore(reducers, applyMiddleware(thunkMiddleware));

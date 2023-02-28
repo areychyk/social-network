@@ -1,15 +1,16 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
-
-
 import {sendMessageActionCreator, updateMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import {ActionsType, StorePropsType, StoreType} from "../../redux/redux-store";
-import {Dialogs} from "./Dialogs";
+import {Dialogs, PostPropsType} from "./Dialogs";
 import {connect} from "react-redux";
+import {WithAuthRedirectComponent} from "../../hoc/WithAuthRedirect";
+
+
 
 const mapStateToProps = (state:StoreType) => {
     return{
         dialogsPage:state.dialogsPage,
-        isAuth:state.auth.isAuth
+
     }
 }
 
@@ -23,7 +24,34 @@ return {
     }
 }
 }
-export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+// let AuthRedirectComponent = (props:PostPropsType)=>{
+//     if (!props.isAuth) return <Redirect to={'/login'}/>
+//     return (
+//         <Dialogs {...props} />
+//     )
+// }
+
+// export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+
+
+export const DialogsContainer = WithAuthRedirectComponent(connect(mapStateToProps,mapDispatchToProps)(Dialogs));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,7 +97,6 @@ export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dial
 //         />
 //     )
 // }
-
 
 
 

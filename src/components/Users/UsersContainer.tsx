@@ -19,8 +19,9 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 import {usersAPI} from "../../api/api";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {ThunkDispatch} from "redux-thunk";
+import {WithAuthRedirectComponent} from "../../hoc/WithAuthRedirect";
 
 
 
@@ -138,7 +139,20 @@ const mapStateToProps = (state: StoreType) => {
 //
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIClassComponent);
 
-export const UsersContainer = connect(mapStateToProps, {
+// export const UsersContainer = connect(mapStateToProps, {
+//     setUsers,
+//     setCurrentPage,
+//     setTotalUsersCount,
+//     toggleIsFetching,
+//     toggleIsFollowingProgress,
+//     getUsersThunkCreator,
+//     follow,
+//     unfollow
+//
+// })(UsersAPIClassComponent);
+
+export const UsersContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
@@ -148,6 +162,6 @@ export const UsersContainer = connect(mapStateToProps, {
     follow,
     unfollow
 
-})(UsersAPIClassComponent);
-
-
+}),
+    WithAuthRedirectComponent
+)(UsersAPIClassComponent)

@@ -44,9 +44,16 @@ export class ProfileStatus extends React.Component<ProfileStatusType, { editMode
         this.setState({
             localStatus:event.currentTarget.value
         })
-
-
     }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{ editMode: boolean; localStatus: string }>, snapshot?: any) {
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                localStatus:this.props.status
+            })
+        }
+    }
+
 
     render() {
 

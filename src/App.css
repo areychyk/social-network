@@ -1,6 +1,9 @@
 /**{*/
 /*    text-decoration: none;*/
+/*    */
 /*}*/
+
+
 
 a:-webkit-any-link {
 
@@ -18,13 +21,16 @@ a:-webkit-any-link {
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
     grid-gap: 10px;
+    height: 100vh;
 }
 
 
 .app-wrapper-content{
-
+    display: block;
+    height: 100vh;
     grid-area: c;
     background-color: beige;
+    padding: 20px;
 
 }
 

@@ -13,6 +13,8 @@ import {
 } from "./users-reducer";
 import {authReducer, SetUserAuthDataActionType} from "./auth-reducer";
 
+import { reducer as formReducer } from 'redux-form'
+
 export type StorePropsType = {
     subscribe: (observer: (state: StoreType) => void) => void
     getState: () => StoreType
@@ -113,7 +115,8 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer,
 
 
 });

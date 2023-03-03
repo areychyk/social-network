@@ -2,7 +2,7 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {ProfileType, StoreType} from "../../redux/redux-store";
-import {getUser} from "../../redux/profile-reducer";
+import {getUser, getUserStatus, updateUserStatus} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirectComponent} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
@@ -11,6 +11,9 @@ import {compose} from "redux";
 type ProfileContainerPropsType = {
     profile: ProfileType | null
     getUser: (userID: string) => void
+    getUserStatus: (userID: string) => void
+    status:string
+    updateUserStatus:(status:string)=>void
 
 }
 
@@ -28,6 +31,8 @@ export class ProfileAPIContainer extends React.Component<PropsType> {
             userID = '27605';
         }
         this.props.getUser(userID)
+        this.props.getUserStatus(userID)
+
 
 
     }
@@ -35,7 +40,11 @@ export class ProfileAPIContainer extends React.Component<PropsType> {
     render() {
 
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile
+                profile={this.props.profile}
+                status={this.props.status}
+                updateUserStatus={this.props.updateUserStatus}
+            />
         )
     }
 
@@ -45,6 +54,7 @@ export class ProfileAPIContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: StoreType) => ({
     profile: state.profilePage.profile,
+    status:state.profilePage.status
 
 })
 
@@ -55,7 +65,7 @@ const mapStateToProps = (state: StoreType) => ({
 
 
 export const ProfileContainer=compose<React.ComponentType>(
-    connect(mapStateToProps, {getUser}),
+    connect(mapStateToProps, {getUser,getUserStatus, updateUserStatus}),
     withRouter,
     // WithAuthRedirectComponent
 )

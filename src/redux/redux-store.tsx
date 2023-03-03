@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 
-import {profileReducer, SetUsersProfileActionType} from "./profile-reducer";
+import {profileReducer, SetUsersProfileActionType, SetUsersStatusActionType} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {
@@ -33,6 +33,7 @@ export type ActionsType =
     | SetUsersProfileActionType
     | SetUserAuthDataActionType
     | ToggleIsFollowingProgressActionType
+    | SetUsersStatusActionType
 
 
 export type AddPostActionType = {
@@ -57,6 +58,7 @@ export type PropsTypeProfile = {
     post: PostDataType[]
     newPostText: string
     profile: null | ProfileType
+    status: string
 }
 
 export type ProfileType = {

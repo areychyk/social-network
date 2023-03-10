@@ -14,7 +14,12 @@ export const Login = () => {
         <div className={s.wrapperLogin}>
             <h1>Login</h1>
             <div className={s.loginForm}>
+
+
                 <LoginReduxForm onSubmit={onSubmit}/>
+
+
+
             </div>
 
             <div>

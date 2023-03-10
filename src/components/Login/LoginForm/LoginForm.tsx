@@ -1,5 +1,4 @@
-import React, {FormEventHandler} from 'react';
-import s from './LoginForm.module.css'
+import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
@@ -40,7 +39,7 @@ const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 }
 
 
-export const LoginReduxForm = reduxForm<FormDataType>({
+export const  LoginReduxForm = reduxForm<FormDataType>({
 
     form: 'login'
 })(LoginForm)

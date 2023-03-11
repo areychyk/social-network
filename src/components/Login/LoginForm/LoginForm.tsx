@@ -1,5 +1,7 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Input} from "../../common/FormsControl/FormControl";
+import {maxLengthCreator, required} from "../../../utils/validators/validator";
 
 
 
@@ -11,7 +13,7 @@ export type FormDataType={
     rememberMe:boolean
 }
 
-
+const maxLength = maxLengthCreator(10)
 
 const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
@@ -20,13 +22,13 @@ const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field  placeholder={'login'} name={'login'} component={'input'}/>
+                <Field  placeholder={'login'} name={'login'} component={Input} validate={[required, maxLength]}/>
             </div>
             <div>
-                <Field placeholder={'password'} name={'password'} component={'input'}/>
+                <Field placeholder={'password'} name={'password'} component={Input} validate={[required, maxLength]}/>
             </div>
             <div>
-                <Field type="checkbox"  name={'rememberMe'} component={'input'}/> remember me
+                <Field type="checkbox"  name={'rememberMe'} component={Input} /> remember me
             </div>
             <div>
                 <button>login</button>

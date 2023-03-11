@@ -1,0 +1,69 @@
+
+
+
+.formControl{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+
+
+}
+
+.formControl input,
+.formControl textarea
+{
+    height: 75px;
+    border-radius: 5px;
+
+
+}
+
+
+.formControl.error input,
+.formControl.error textarea
+{
+    border: 2px red solid;
+
+
+}
+
+.formControl.error span
+{
+    color: red;
+}
+
+
+
+
+
+
+
+.formControlInput{
+
+
+
+
+}
+
+.formControlInput input,
+.formControlInput textarea
+{
+
+    border-radius: 5px;
+
+
+}
+
+
+.formControlInput.error input,
+.formControlInput.error textarea
+{
+    border: 2px red solid;
+
+
+}
+
+.formControlInput.error span
+{
+    color: red;
+}

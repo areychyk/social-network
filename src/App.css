@@ -27,7 +27,7 @@ a:-webkit-any-link {
 
 .app-wrapper-content{
     display: block;
-    height: 100vh;
+    height: 100%;
     grid-area: c;
     background-color: beige;
     padding: 20px;

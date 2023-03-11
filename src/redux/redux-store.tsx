@@ -23,8 +23,6 @@ export type StorePropsType = {
 
 export type ActionsType =
     AddPostActionType
-    | UpdateNewPostTextActionType
-    | UpdateNewMessageBodyActionType
     | SendMessageActionType
     | FollowActionType
     | UnfollowActionType
@@ -40,25 +38,18 @@ export type ActionsType =
 
 export type AddPostActionType = {
     type: 'ADD-POST'
+    newPostText:string
 
 }
-export type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
 
-}
-export type UpdateNewMessageBodyActionType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY'
-    body: string
 
-}
 export type SendMessageActionType = {
     type: 'SEND-MESSAGE'
+    newMessage:string
 }
 
 export type PropsTypeProfile = {
     post: PostDataType[]
-    newPostText: string
     profile: null | ProfileType
     status: string
 }
@@ -88,7 +79,7 @@ export type ProfileType = {
 export type PropsTypeMessage = {
     dialogs: DialogsDataType[]
     message: MessageDataType[]
-    newMessageBody: string
+
 
 }
 

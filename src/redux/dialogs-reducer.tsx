@@ -1,6 +1,6 @@
-import {ActionsType, PropsTypeMessage, SendMessageActionType, UpdateNewMessageBodyActionType} from "./redux-store";
+import {ActionsType, PropsTypeMessage, SendMessageActionType} from "./redux-store";
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 
@@ -23,29 +23,25 @@ let initialState={
             {id: 5, name: "User5"},
             {id: 6, name: "User6"},
         ],
-        newMessageBody: ''
+
 
     };
 
 export const dialogsReducer = (state: PropsTypeMessage=initialState, action: ActionsType) => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return{...state,newMessageBody:action.body}
+
 
 
 
         case SEND_MESSAGE:
-            let body = state.newMessageBody
-            let newMessage = {id: state.message.length+1, message: body};
+            let newMessage = {id: state.message.length+1, message: action.newMessage};
             return{
                 ...state,
                 message:[...state.message, newMessage],
-                newMessageBody :'',
+
             }
 
-            // stateCopy.message.push(newMessage)
-            // stateCopy.newMessageBody = ''
 
 
         default:
@@ -56,8 +52,4 @@ export const dialogsReducer = (state: PropsTypeMessage=initialState, action: Act
     return state
 }
 
-export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE} as const)
-export const updateMessageTextActionCreator = (text: string): UpdateNewMessageBodyActionType => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: text
-})
+export const sendMessageActionCreator = (newMessage:string): SendMessageActionType => ({type: SEND_MESSAGE, newMessage} as const)

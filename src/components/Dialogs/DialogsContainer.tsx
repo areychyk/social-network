@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
-import {sendMessageActionCreator, updateMessageTextActionCreator} from "../../redux/dialogs-reducer";
+import {sendMessageActionCreator} from "../../redux/dialogs-reducer";
 import {ActionsType, StorePropsType, StoreType} from "../../redux/redux-store";
 import {Dialogs, PostPropsType} from "./Dialogs";
 import {connect} from "react-redux";
@@ -17,26 +17,13 @@ const mapStateToProps = (state:StoreType) => {
 
 const mapDispatchToProps = (dispatch:(action: ActionsType) => void) => {
 return {
-    updateNewMessageText:(body:string)=>{
-        dispatch(updateMessageTextActionCreator(body))
-    },
-    sendMessage:()=>{
-        dispatch(sendMessageActionCreator())
+
+    sendMessage:(newMessage:string)=>{
+        dispatch(sendMessageActionCreator(newMessage))
     }
 }
 }
-// let AuthRedirectComponent = (props:PostPropsType)=>{
-//     if (!props.isAuth) return <Redirect to={'/login'}/>
-//     return (
-//         <Dialogs {...props} />
-//     )
-// }
 
-// export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
-
-
-
-// export const DialogsContainer = WithAuthRedirectComponent(connect(mapStateToProps,mapDispatchToProps)(Dialogs));
 
 export const DialogsContainer = compose<React.ComponentType>(
     connect(mapStateToProps,mapDispatchToProps),

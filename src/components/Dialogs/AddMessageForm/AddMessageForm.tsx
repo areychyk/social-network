@@ -8,7 +8,7 @@ export type AddMessageFormPropsType={
     // newMessageBody:string
     // sendMessage: () => void
     // updateNewMessageText:(dody:string)=>void
-    message:string
+    newMessage:string
 
 
 }
@@ -22,29 +22,18 @@ export const AddMessageForm:React.FC<InjectedFormProps<AddMessageFormPropsType>>
     //
     // }
     //
-    // const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    //     let body = event.currentTarget.value;
-    //     // props.store.dispatch(updateMessageTextActionCreator(body))
-    //     props.updateNewMessageText(body);
-    //
-    // }
 
 
-    // const onSendMessageClick = () => {
-    //
-    //     props.sendMessage()
-    // }
+
+
 
     return (
 
                     <form onSubmit={props.handleSubmit}>
                         <Field
-                            // value={props.newMessageBody}
-                            //
-                            // onChange={onNewMessageChange}
-                            // onKeyDown={SendMessageKeyDown}
+
                             placeholder={'Enter your message'}
-                            name={'message'}
+                            name={'newMessage'}
                             component={'textarea'}
                         ></Field>
                         <div>
@@ -60,6 +49,6 @@ export const AddMessageForm:React.FC<InjectedFormProps<AddMessageFormPropsType>>
 
 export const  AddMessageFormRedux = reduxForm<AddMessageFormPropsType>({
 
-    form: 'message'
+    form: 'dialogAddMessageForm'
 })(AddMessageForm)
 

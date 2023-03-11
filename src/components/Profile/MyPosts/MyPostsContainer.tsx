@@ -1,52 +1,39 @@
 
 
 
-import {ActionsType, PostDataType, StorePropsType, StoreType,} from "../../../redux/redux-store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import {ActionsType,  StoreType} from "../../../redux/redux-store";
+import {addPostActionCreator} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
-import {sendMessageActionCreator, updateMessageTextActionCreator} from "../../../redux/dialogs-reducer";
+
 import {connect} from "react-redux";
-import {Dialogs} from "../../Dialogs/Dialogs";
-// import {StoreContext} from "../../../StoreContext";
+
 
 
 
 type PostPropsType = {
-    // posts: PostDataType[]
-    // dispatch: (action: ActionsType) => void
-    // newPostText: string
-
-    // store:StorePropsType
 
 
 }
 
 
-//lesson 45
-
-// export type PostPropsType = {
-//     store:StorePropsType
-//
-// }
 
 const mapStateToProps = (state:StoreType) => {
     return{
         posts:state.profilePage.post,
-        newPostText:state.profilePage.newPostText
+
     }
 }
 
 const mapDispatchToProps = (dispatch:(action: ActionsType) => void) => {
     return {
-        addPost:()=>{
-            dispatch(addPostActionCreator());
+        addPost:(newPostText:string)=>{
+            dispatch(addPostActionCreator(newPostText));
         },
-        updateNewPostText:(text:string)=>{
-            dispatch(updateNewPostTextActionCreator(text))
-        }
+
     }
 }
 export const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts);
+
 
 
 

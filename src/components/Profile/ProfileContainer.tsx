@@ -13,6 +13,8 @@ type ProfileContainerPropsType = {
     getUserStatus: (userID: string) => void
     status:string
     updateUserStatus:(status:string)=>void
+    AuthUserID:string
+    isAuth:string
 
 }
 
@@ -27,7 +29,7 @@ export class ProfileAPIContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userID = this.props.match.params.userID
         if (!userID) {
-            userID = '27605';
+            userID = this.props.AuthUserID;
         }
         this.props.getUser(userID)
         this.props.getUserStatus(userID)
@@ -53,7 +55,9 @@ export class ProfileAPIContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: StoreType) => ({
     profile: state.profilePage.profile,
-    status:state.profilePage.status
+    status:state.profilePage.status,
+    AuthUserID:state.auth.UserId,
+    isAuth:state.auth.isAuth
 
 })
 

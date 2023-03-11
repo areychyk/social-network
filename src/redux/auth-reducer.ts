@@ -1,16 +1,6 @@
-import {ActionsType} from "./redux-store";
+import {ActionsType, StoreType} from "./redux-store";
 import {Dispatch} from "redux";
-import {authAPI, usersAPI} from "../api/api";
-import {toggleIsFollowingProgress, unfollowSuccess} from "./users-reducer";
-
-
-export type UsersAuthType = {
-    UserId: number | null
-    login: string | null
-    email: string | null
-    isAuth: boolean
-    isFetching: boolean
-}
+import {authAPI} from "../api/api";
 
 
 let initialState: UsersAuthType = {
@@ -28,8 +18,8 @@ export const authReducer = (state: UsersAuthType = initialState, action: Actions
 
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload,
+                // isAuth: true
             }
 
 
@@ -40,26 +30,37 @@ export const authReducer = (state: UsersAuthType = initialState, action: Actions
 
 }
 
-
+//types
 const SET_USER_DATA = 'SET-USER-DATA';
 
 
 export type SetUserAuthDataActionType = {
     type: 'SET-USER-DATA'
-    data: {
+    payload: {
         UserId: number | null
         login: string | null
         email: string | null
+        isAuth: boolean
     }
 }
 
+export type UsersAuthType = {
+    UserId: number | null
+    login: string | null
+    email: string | null
+    isAuth: boolean
+    isFetching: boolean
+}
+
+
 //Action Create
-export const setAuthUserData = (UserId: number, login: string, email: string): SetUserAuthDataActionType => ({
+export const setAuthUserData = (UserId: number | null, login: string | null, email: string | null, isAuth: boolean): SetUserAuthDataActionType => ({
     type: SET_USER_DATA,
-    data: {
+    payload: {
         UserId,
         login,
-        email
+        email,
+        isAuth
     }
 } as const)
 
@@ -71,7 +72,7 @@ export const getUserData = () => (dispatch: Dispatch) => {
 
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data
-                dispatch(setAuthUserData(id, login, email))
+                dispatch(setAuthUserData(id, login, email, true))
             }
 
 
@@ -79,6 +80,35 @@ export const getUserData = () => (dispatch: Dispatch) => {
 
 
 }
+
+
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+
+                dispatch(setAuthUserData(response.data.data.userId, email, email, true))
+
+            }
+
+        })
+
+
+}
+
+export const logout = () => (dispatch: Dispatch) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+
+                dispatch(setAuthUserData(null, null, null, false))
+            }
+
+        })
+
+
+}
+
 
 
 

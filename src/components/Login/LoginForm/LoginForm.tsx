@@ -8,12 +8,12 @@ import {maxLengthCreator, required} from "../../../utils/validators/validator";
 
 
 export type FormDataType={
-    login:string
+    email:string
     password:string
     rememberMe:boolean
 }
 
-const maxLength = maxLengthCreator(10)
+const maxLength = maxLengthCreator(20)
 
 const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
@@ -22,10 +22,10 @@ const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field  placeholder={'login'} name={'login'} component={Input} validate={[required, maxLength]}/>
+                <Field  placeholder={'email'} name={'email'} component={Input} validate={[required, maxLength]}/>
             </div>
             <div>
-                <Field placeholder={'password'} name={'password'} component={Input} validate={[required, maxLength]}/>
+                <Field placeholder={'password'} name={'password'} component={Input} validate={[required, maxLength]} type={'password'}/>
             </div>
             <div>
                 <Field type="checkbox"  name={'rememberMe'} component={Input} /> remember me

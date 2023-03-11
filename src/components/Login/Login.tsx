@@ -1,15 +1,27 @@
 import React from 'react';
 import s from './Login.module.css'
 import {FormDataType, LoginReduxForm} from "./LoginForm/LoginForm";
+import {Redirect} from "react-router-dom";
 
 
-export const Login = () => {
+type LoginPropsType = {
+    login: (email:string, password:string, rememberMe:boolean) => void
+    isAuth:boolean
+}
+
+
+export const Login = (props: LoginPropsType) => {
 
 
     const onSubmit = (formData: FormDataType) => {
+        const {email, password, rememberMe}=formData
         console.log(formData)
+        props.login(email,password,rememberMe)
     }
 
+    if(props.isAuth){
+        return <Redirect to={'/profile'}/>
+    }
     return (
         <div className={s.wrapperLogin}>
             <h1>Login</h1>
@@ -17,7 +29,6 @@ export const Login = () => {
 
 
                 <LoginReduxForm onSubmit={onSubmit}/>
-
 
 
             </div>
@@ -38,3 +49,5 @@ export const Login = () => {
     )
 
 }
+
+

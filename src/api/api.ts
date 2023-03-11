@@ -20,6 +20,8 @@ export type ResponseType<T = {}> = {
 
 }
 
+
+
 type AuthUserType = {
     id: number
     login: string
@@ -33,14 +35,6 @@ export type UsersResponseType = {
 
 }
 
-// export type UserResponseType = {
-//     id: string
-//     followed: boolean
-//     photos: { small: null | string, large: null | string }
-//     name: string
-//     status: string
-//     location?: { city: string, country: string }
-// }
 
 
 
@@ -73,7 +67,7 @@ export const profileAPI = {
 
     },
     getStatus(userID: string) {
-        return instance.get<any>(`profile/status/${userID}`)
+        return instance.get(`profile/status/${userID}`)
 
     },
     updateStatus(status: string  ) {
@@ -87,6 +81,14 @@ export const profileAPI = {
 export const authAPI = {
     me() {
         return instance.get<ResponseType<AuthUserType>>(`auth/me`)
+    },
+    login(email:string,password:string,rememberMe:boolean=false){
+        return instance.post<ResponseType<{ userId: number }>>(`auth/login`,{email,password,rememberMe})
+    },
+    logout(){
+        return instance.delete<ResponseType>(`auth/login`)
     }
+
+
 }
 

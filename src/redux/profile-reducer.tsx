@@ -5,7 +5,7 @@ import {
     PropsTypeProfile,
 } from "./redux-store";
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 
 const ADD_POST = 'ADD-POST';

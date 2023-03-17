@@ -1,16 +1,16 @@
 import React from 'react';
-import {ActionsType, StoreType} from "../../redux/redux-store";
+import { StoreType} from "../../redux/redux-store";
 
 import {connect} from "react-redux";
 
 
 import {
     follow,
-    followSuccess, getUsersThunkCreator,
+    getUsersThunkCreator,
     setCurrentPage,
     setTotalUsersCount,
     setUsers, toggleIsFetching, toggleIsFollowingProgress, unfollow,
-    unfollowSuccess,
+
     UsersPage
 } from "../../redux/users-reducer";
 
@@ -18,10 +18,15 @@ import {
 
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
-import {usersAPI} from "../../api/api";
-import {compose, Dispatch} from "redux";
-import {ThunkDispatch} from "redux-thunk";
-import {WithAuthRedirectComponent} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getPageSize,
+    getUsers,
+    getIsFetching,
+    getTotalUsersCount
+} from "../../redux/users-selectors";
 
 
 
@@ -54,14 +59,6 @@ export class UsersAPIClassComponent extends React.Component<UsersPropsType, User
     onPageChanged = (pageNumber: number) => {
         this.props.getUsersThunkCreator(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber);
-        // this.props.toggleIsFetching(true)
-        //
-        //
-        // usersAPI.getUsers(pageNumber, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.toggleIsFetching(false)
-        //         this.props.setUsers(data.items)
-        //     })
 
     }
 
@@ -87,14 +84,25 @@ export class UsersAPIClassComponent extends React.Component<UsersPropsType, User
 }
 
 
+// const mapStateToProps = (state: StoreType) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress:state.usersPage.followingInProgress,
+//     }
+// }
+
 const mapStateToProps = (state: StoreType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress:state.usersPage.followingInProgress,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress:getFollowingInProgress(state),
     }
 }
 

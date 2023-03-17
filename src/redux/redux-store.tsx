@@ -13,7 +13,8 @@ import {
 } from "./users-reducer";
 import {authReducer, SetUserAuthDataActionType} from "./auth-reducer";
 
-import { reducer as formReducer } from 'redux-form'
+import {reducer as formReducer} from 'redux-form'
+import {appReducer, SetInitializedAT} from "./app-reducer";
 
 export type StorePropsType = {
     subscribe: (observer: (state: StoreType) => void) => void
@@ -34,18 +35,19 @@ export type ActionsType =
     | SetUserAuthDataActionType
     | ToggleIsFollowingProgressActionType
     | SetUsersStatusActionType
+    | SetInitializedAT
 
 
 export type AddPostActionType = {
     type: 'ADD-POST'
-    newPostText:string
+    newPostText: string
 
 }
 
 
 export type SendMessageActionType = {
     type: 'SEND-MESSAGE'
-    newMessage:string
+    newMessage: string
 }
 
 export type PropsTypeProfile = {
@@ -108,6 +110,7 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
+    initialized:appReducer,
 
 
 });

@@ -5,8 +5,6 @@ import s from './Users.module.css'
 import userPhoto from '../../assets/images/Sample_User_Icon.png'
 import {NavLink} from "react-router-dom";
 
-import {usersAPI} from "../../api/api";
-
 
 export type UsersPropsType = {
     users: UsersPage[]

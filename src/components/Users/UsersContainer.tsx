@@ -98,58 +98,7 @@ const mapStateToProps = (state: StoreType) => {
     }
 }
 
-// type mapDispatchToType = {
-//
-//     setUsers: (users: UsersPage[]) => void
-//     setCurrentPage: (currentPage: number) => void
-//     setTotalUsersCount: (totalCount: number) => void
-//     toggleIsFetching: (isFetching: boolean) => void
-//     toggleIsFollowingProgress:(followingInProgress:boolean,userID:string)=>void
-//     getUsersThunkCreator:(currentPage:number,pageSize:number)=>void
-//
-//
-// }
-//
-// const mapDispatchToProps = (dispatch:AppDispatch): mapDispatchToType=> {
-//     return {
-//
-//         setUsers: (users: UsersPage[]) => {
-//             dispatch(setUsers(users))
-//
-//         },
-//         setCurrentPage: (currentPage: number) => {
-//             dispatch(setCurrentPage(currentPage))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCount(totalCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetching(isFetching))
-//         },
-//         toggleIsFollowingProgress:(followingInProgress: boolean,userID:string)=>{
-//             dispatch(toggleIsFollowingProgress(followingInProgress,userID))
-//         },
-//         getUsersThunkCreator:(currentPage:number,pageSize:number)=>{
-//             dispatch(getUsersThunkCreator(currentPage,pageSize))
-//         }
-//
-//     }
-// }
-//
-//
-// export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIClassComponent);
 
-// export const UsersContainer = connect(mapStateToProps, {
-//     setUsers,
-//     setCurrentPage,
-//     setTotalUsersCount,
-//     toggleIsFetching,
-//     toggleIsFollowingProgress,
-//     getUsersThunkCreator,
-//     follow,
-//     unfollow
-//
-// })(UsersAPIClassComponent);
 
 export const UsersContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {
@@ -162,6 +111,5 @@ export const UsersContainer = compose<React.ComponentType>(
     follow,
     unfollow
 
-}),
-    WithAuthRedirectComponent
+})
 )(UsersAPIClassComponent)

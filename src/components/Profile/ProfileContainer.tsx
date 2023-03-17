@@ -30,6 +30,9 @@ export class ProfileAPIContainer extends React.Component<PropsType> {
         let userID = this.props.match.params.userID
         if (!userID) {
             userID = this.props.AuthUserID;
+            if(!userID){
+                this.props.history.push("/login")
+            }
         }
         this.props.getUser(userID)
         this.props.getUserStatus(userID)

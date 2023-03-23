@@ -3,6 +3,7 @@ import React from "react";
 import {ProfileType} from "../../../redux/redux-store";
 import {Preloader} from "../../common/preloader/Preloader";
 import {ProfileStatus} from "../ProfileStatus/ProfileStatus";
+import {ProfileStatusWithHooks} from "../ProfileStatus/ProfileStatusWithHooks";
 
 type ProfileInfoType = {
     profile: ProfileType | null
@@ -24,7 +25,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             <h2>{props.profile.fullName}</h2>
             <p>Status: {props.profile.lookingForAJobDescription}</p>
 
-            <ProfileStatus
+            <ProfileStatusWithHooks
                 status={props.status}
                 updateUserStatus={props.updateUserStatus}
             />

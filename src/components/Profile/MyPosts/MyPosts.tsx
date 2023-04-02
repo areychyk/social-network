@@ -1,11 +1,10 @@
-import React, {KeyboardEvent} from 'react';
+import React from 'react';
 
 import s from '../MyPosts/MyPosts.module.css'
 
-import { PostDataType, } from "../../../redux/redux-store";
-import {AddNewPostFormRedux,  AddPostPropsType} from "./AddNewPostForm/AddNewPostForm";
+import {PostDataType,} from "../../../redux/redux-store";
+import {AddNewPostFormRedux, AddPostPropsType} from "./AddNewPostForm/AddNewPostForm";
 import {Post} from "./Post/Post";
-
 
 
 type PostPropsType = {
@@ -16,17 +15,17 @@ type PostPropsType = {
 }
 
 
+export const MyPosts = React.memo((props: PostPropsType) => {
+    console.log('my post')
 
-export const MyPosts = (props: PostPropsType) => {
 
     let postElement = props.posts.map(p => <Post key={p.id} message={p.message} like={p.like}/>)
 
 
-const addNewPost = (formData:AddPostPropsType) => {
-    console.log(formData.newPost)
-    props.addPost(formData.newPost)
-}
-
+    const addNewPost = (formData: AddPostPropsType) => {
+        console.log(formData.newPost)
+        props.addPost(formData.newPost)
+    }
 
 
     return (
@@ -34,7 +33,7 @@ const addNewPost = (formData:AddPostPropsType) => {
             <h3>My posts</h3>
             <div>
 
-               <AddNewPostFormRedux onSubmit={addNewPost}/>
+                <AddNewPostFormRedux onSubmit={addNewPost}/>
 
             </div>
             <div className={s.posts}>
@@ -45,5 +44,5 @@ const addNewPost = (formData:AddPostPropsType) => {
         </div>
 
     )
-}
+});
 

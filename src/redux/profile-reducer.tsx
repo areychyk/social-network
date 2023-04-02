@@ -8,6 +8,8 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 
+
+
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE='SET-USER-PROFILE';
 const SET_USER_STATUS='SET-USER-STATUS';
@@ -94,6 +96,9 @@ export const getUser =(userId:string)=>{
             .then(response => {
                dispatch(setUserProfile(response.data))
             })
+            .catch((error)=>{
+                console.log(error.message)
+            })
 
     }
 }
@@ -104,6 +109,9 @@ export const getUserStatus =(userId:string)=>{
             .then(response => {
                 dispatch(setUserStatus(response.data))
             })
+            .catch((error)=>{
+                console.log(error.message)
+        })
     }
 }
 
@@ -115,6 +123,9 @@ export const updateUserStatus =(status:string)=>{
                     dispatch(setUserStatus(status))
                 }
 
+            })
+            .catch((error)=>{
+                console.log(error.message)
             })
     }
 }

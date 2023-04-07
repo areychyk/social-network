@@ -8,20 +8,18 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 
-
-
 const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE='SET-USER-PROFILE';
-const SET_USER_STATUS='SET-USER-STATUS';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_USER_STATUS = 'SET-USER-STATUS';
 
 
 export type SetUsersProfileActionType = {
     type: 'SET-USER-PROFILE'
-    profile:ProfileType|null
+    profile: ProfileType | null
 }
 export type SetUsersStatusActionType = {
     type: 'SET-USER-STATUS'
-    status:string
+    status: string
 }
 
 
@@ -47,7 +45,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
             };
             return {
                 ...state,
-                post: [ newPost,...state.post],
+                post: [newPost, ...state.post],
 
             }
 
@@ -55,10 +53,10 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
         case SET_USER_PROFILE:
             return {
                 ...state,
-                profile:action.profile
+                profile: action.profile
             }
         case SET_USER_STATUS:
-            return {...state, status:action.status}
+            return {...state, status: action.status}
 
 
         default:
@@ -72,15 +70,15 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
 
 //Action Create
 
-export const addPostActionCreator = (newPostText:string): AddPostActionType => ({type: ADD_POST,newPostText})
+export const addPostActionCreator = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText})
 
-export const setUserProfile = (profile:ProfileType): SetUsersProfileActionType => ({
+export const setUserProfile = (profile: ProfileType): SetUsersProfileActionType => ({
     type: SET_USER_PROFILE,
     profile
 
 })
 
-export const setUserStatus = (status:string): SetUsersStatusActionType => ({
+export const setUserStatus = (status: string): SetUsersStatusActionType => ({
     type: SET_USER_STATUS,
     status
 
@@ -88,44 +86,29 @@ export const setUserStatus = (status:string): SetUsersStatusActionType => ({
 
 //Thunk
 
-export const getUser =(userId:string)=>{
-    return (dispatch: Dispatch)=> {
+export const getUser = (userId: string) => {
+    return async (dispatch: Dispatch) => {
 
 
-        profileAPI.getProfile(userId)
-            .then(response => {
-               dispatch(setUserProfile(response.data))
-            })
-            .catch((error)=>{
-                console.log(error.message)
-            })
+        let response = await profileAPI.getProfile(userId);
+        dispatch(setUserProfile(response.data))
 
     }
 }
 
-export const getUserStatus =(userId:string)=>{
-    return (dispatch: Dispatch)=> {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setUserStatus(response.data))
-            })
-            .catch((error)=>{
-                console.log(error.message)
-        })
+export const getUserStatus = (userId: string) => {
+    return async (dispatch: Dispatch) => {
+        let response = await profileAPI.getStatus(userId);
+        dispatch(setUserStatus(response.data))
     }
 }
 
-export const updateUserStatus =(status:string)=>{
-    return (dispatch: Dispatch)=> {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if(response.data.resultCode === 0){
-                    dispatch(setUserStatus(status))
-                }
+export const updateUserStatus = (status: string) => {
+    return async (dispatch: Dispatch) => {
+        let response = await profileAPI.updateStatus(status);
 
-            })
-            .catch((error)=>{
-                console.log(error.message)
-            })
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status))
+        }
     }
 }

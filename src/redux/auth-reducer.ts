@@ -32,11 +32,11 @@ export const authReducer = (state: UsersAuthType = initialState, action: Actions
 }
 
 //types
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USER_DATA = 'auth/SET-USER-DATA';
 
 
 export type SetUserAuthDataActionType = {
-    type: 'SET-USER-DATA'
+    type: 'auth/SET-USER-DATA'
     payload: {
         UserId: number | null
         login: string | null
@@ -67,53 +67,38 @@ export const setAuthUserData = (UserId: number | null, login: string | null, ema
 
 
 //Thunk
-export const getUserData = () => (dispatch: Dispatch) => {
-   return  authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, login, email} = response.data.data
-                dispatch(setAuthUserData(id, login, email, true))
-            }
+export const getUserData = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.me();
+    if (response.data.resultCode === 0) {
+        let {id, login, email} = response.data.data
+        dispatch(setAuthUserData(id, login, email, true))
+    }
+}
 
 
-        })
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
+
+
+    let response = await authAPI.login(email, password, rememberMe);
+
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(response.data.data.userId, email, email, true))
+
+    } else {
+        let messageError = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+        const action = stopSubmit('login', {_error: messageError})
+        dispatch(action)
+    }
 
 
 }
 
+export const logout = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.logout();
+    if (response.data.resultCode === 0) {
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
-
-
-    authAPI.login(email, password, rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(response.data.data.userId, email, email, true))
-
-            }else{
-
-                let messageError = response.data.messages.length>0?response.data.messages[0]:'Some error'
-                const action = stopSubmit('login',{_error: messageError})
-                dispatch(action)
-            }
-
-        })
-
-
-
-}
-
-export const logout = () => (dispatch: Dispatch) => {
-    authAPI.logout()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-
-        })
-
-
+        dispatch(setAuthUserData(null, null, null, false))
+    }
 }
 
 

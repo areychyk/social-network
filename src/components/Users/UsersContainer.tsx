@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoreType} from "../../redux/redux-store";
+import {StoreType} from "../../redux/redux-store";
 
 import {connect} from "react-redux";
 
@@ -9,11 +9,12 @@ import {
     getUsersThunkCreator,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleIsFetching, toggleIsFollowingProgress, unfollow,
-
+    setUsers,
+    toggleIsFetching,
+    toggleIsFollowingProgress,
+    unfollow,
     UsersPage
 } from "../../redux/users-reducer";
-
 
 
 import {Users} from "./Users";
@@ -22,12 +23,11 @@ import {compose} from "redux";
 import {
     getCurrentPage,
     getFollowingInProgress,
-    getPageSize,
-    getUsers,
     getIsFetching,
-    getTotalUsersCount, getUsersSelector
+    getPageSize,
+    getTotalUsersCount,
+    getUsersSelector
 } from "../../redux/users-selectors";
-
 
 
 export type UsersPropsType = {

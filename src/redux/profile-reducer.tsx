@@ -21,6 +21,7 @@ export type SetUsersStatusActionType = {
     type: 'SET-USER-STATUS'
     status: string
 }
+export type deletePostActionType = ReturnType<typeof deletePostActionCreator>
 
 
 let initialState: PropsTypeProfile = {
@@ -45,7 +46,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
             };
             return {
                 ...state,
-                post: [newPost, ...state.post],
+                post: [...state.post, newPost]
 
             }
 
@@ -57,6 +58,9 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
             }
         case SET_USER_STATUS:
             return {...state, status: action.status}
+
+        case "DELETE-POST":
+            return {...state, post:state.post.filter(p=>p.id!==action.idPost)}
 
 
         default:
@@ -84,12 +88,12 @@ export const setUserStatus = (status: string): SetUsersStatusActionType => ({
 
 })
 
+export const deletePostActionCreator = (idPost: number) => ({type: "DELETE-POST" , idPost} as const)
+
 //Thunk
 
 export const getUser = (userId: string) => {
     return async (dispatch: Dispatch) => {
-
-
         let response = await profileAPI.getProfile(userId);
         dispatch(setUserProfile(response.data))
 
@@ -106,7 +110,6 @@ export const getUserStatus = (userId: string) => {
 export const updateUserStatus = (status: string) => {
     return async (dispatch: Dispatch) => {
         let response = await profileAPI.updateStatus(status);
-
         if (response.data.resultCode === 0) {
             dispatch(setUserStatus(status))
         }

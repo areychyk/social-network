@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 
 import {
@@ -27,6 +27,7 @@ export type StorePropsType = {
     dispatch: (action: ActionsType) => void
 }
 
+
 export type ActionsType =
     AddPostActionType
     | SendMessageActionType
@@ -49,7 +50,6 @@ export type AddPostActionType = {
     newPostText: string
 
 }
-
 
 export type SendMessageActionType = {
     type: 'SEND-MESSAGE'
@@ -126,7 +126,10 @@ export type StoreType = ReturnType<typeof reducers>
 // export type AppDispatch = ThunkDispatch<RootStateType, ActionsType, any>
 
 
-export let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)))
+// export let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 // console.log(store)
 
 // @ts-ignore

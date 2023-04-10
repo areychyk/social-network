@@ -5,6 +5,7 @@ import React, {ChangeEvent,KeyboardEvent} from "react";
 type ProfileStatusType = {
     status: string
     updateUserStatus:(status:string)=>void
+    // updateUserStatus?:any
 }
 
 

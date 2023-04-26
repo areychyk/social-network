@@ -1,20 +1,9 @@
 
-
-
-import {ActionsType,  StoreType} from "../../../redux/redux-store";
-import {addPostActionCreator} from "../../../redux/profile-reducer";
+import {ActionsType,  StoreType} from "redux/redux-store";
+import {addPostActionCreator} from "redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 
 import {connect} from "react-redux";
-
-
-
-
-type PostPropsType = {
-
-
-}
-
 
 
 const mapStateToProps = (state:StoreType) => {

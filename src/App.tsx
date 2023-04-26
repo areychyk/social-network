@@ -1,34 +1,36 @@
 import React from 'react';
 import './App.css';
-
-import {Navbar} from "./components/Navbar/Navbar";
-
-
+import {Navbar} from "components/Navbar/Navbar";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
-import {News} from "./components/News/News";
-import {Music} from "./components/Music/Music";
-import {Settings} from "./components/Settings/Settings";
+import {News} from "components/News/News";
+import {Music} from "components/Music/Music";
+import {Settings} from "components/Settings/Settings";
+import {DialogsContainer} from "components/Dialogs/DialogsContainer";
 
+// const DialogsContainer = React.lazy(() => import('components/Dialogs/DialogsContainer').then((value)=>({
+//     default:value.DialogsContainer
+// })));
+// const DialogsContainer = React.lazy(async () => ({ default: (await import('components/Dialogs/DialogsContainer')).DialogsContainer }))
+// const DialogsContainer = React.lazy(() =>
+//     import('components/Dialogs/DialogsContainer')
+//         .then(({ DialogsContainer }) => ({ default: DialogsContainer })),
+// );
+// const DialogsContainer = React.lazy(() => import("components/Dialogs/DialogsContainer").then((value) => ({default: value.DialogsContainer})));
 
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-
-import {UsersContainer} from "./components/Users/UsersContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
-import {HeaderContainer} from "./components/Header/HeaderContainer";
-
-import {LoginContainer} from "./components/Login/LoginContainer";
+import {UsersContainer} from "components/Users/UsersContainer";
+import {ProfileContainer} from "components/Profile/ProfileContainer";
+import {HeaderContainer} from "components/Header/HeaderContainer";
+import {LoginContainer} from "components/Login/LoginContainer";
 import {connect, Provider} from "react-redux";
-
 import {compose} from "redux";
-
-import {initializeApp} from "./redux/app-reducer";
-import {store, StoreType} from "./redux/redux-store";
-import {Preloader} from "./components/common/preloader/Preloader";
+import {initializeApp} from "redux/app-reducer";
+import {store, StoreType} from "redux/redux-store";
+import {Preloader} from "components/common/preloader/Preloader";
 
 
 type StatePropsType = {
     initializeApp: () => void
-    initialized:boolean
+    initialized: boolean
 
 }
 
@@ -43,7 +45,7 @@ class App extends React.Component<StatePropsType> {
     }
 
     render() {
-        if(!this.props.initialized){
+        if (!this.props.initialized) {
 
             return <Preloader/>
         }
@@ -56,7 +58,15 @@ class App extends React.Component<StatePropsType> {
 
                     <Route path={'/profile/:userID?'} render={() => <ProfileContainer/>}/>
 
-                    <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                    <Route path={'/dialogs'} render={() => {
+                        return(
+                            <React.Suspense fallback={<Preloader />}>
+                                <DialogsContainer/>
+                            </React.Suspense>
+
+                        )
+
+                    }}/>
 
                     <Route path={'/users'} render={() => <UsersContainer/>}/>
 
@@ -76,16 +86,16 @@ class App extends React.Component<StatePropsType> {
 }
 
 const mapStateToProps = (state: StoreType) => ({
-       initialized:state.initialized
+    initialized: state.initialized
 })
 
-let AppContainer =  compose<React.ComponentType>(
+let AppContainer = compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App);
 
 
-export const MainApp=()=>{
-    return  <BrowserRouter>
+export const MainApp = () => {
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>

@@ -1,5 +1,5 @@
 import {ActionsType} from "./redux-store";
-import {ResponseType, usersAPI} from "../api/api";
+import {ResponseType, usersAPI} from "api/api";
 import {Dispatch} from "redux";
 import {AxiosResponse} from "axios";
 
@@ -26,8 +26,8 @@ export type UsersPage = {
 
 let initialState: UsersType = {
     users: [],
-    pageSize: 5,
-    totalUsersCount: 50,
+    pageSize: 10,
+    totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],
@@ -50,6 +50,7 @@ export const usersReducer = (state: UsersType = initialState, action: ActionsTyp
             return {...state, currentPage: action.currentPage}
 
         case SET_TOTAL_COUNT:
+
             return {...state, totalUsersCount: action.totalCount}
 
         case TOGGLE_IS_FETCHING:
@@ -118,10 +119,11 @@ export const toggleIsFollowingProgress = (followingInProgress: boolean, userID: 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     return async (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
         let data = await usersAPI.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
-        // setTotalUsersCount(data.totalCount)
+        dispatch(setTotalUsersCount(data.totalCount))
     }
 
 }

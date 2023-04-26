@@ -1,20 +1,20 @@
-.pageUsersBlock{
+.pagiantor{
     padding: 15px 5px;
 
 }
 
-.pageUsersBlock span{
 
-    margin: 0 5px;
-    cursor: pointer;
-
-}
-
-
-.selectedPage {
+.page{
     font-size: 20px;
+    padding: 2px;
+    cursor: pointer;
+}
+.selectedPage {
+    padding: 0px 4px 0px 4px;
+    font-size:30px;
     color: gray;
     font-weight: bold;
+    cursor: pointer;
 
 
 }

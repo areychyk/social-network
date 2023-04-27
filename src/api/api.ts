@@ -1,6 +1,6 @@
 import axios from "axios";
-import {ProfileType} from "../redux/redux-store";
-import {UsersPage} from "../redux/users-reducer";
+import {ProfileType} from "redux/redux-store";
+import {UsersPage} from "redux/users-reducer";
 
 
 const instance = axios.create({
@@ -8,6 +8,7 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
         "API-KEY": "b45e6fbf-0e93-4502-a0b4-aff308e92526"
+
 
     }
 })

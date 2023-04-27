@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {UsersPage} from "../../../redux/users-reducer";
+import {UsersPage} from "redux/users-reducer";
 import s from './User.module.css'
 
 

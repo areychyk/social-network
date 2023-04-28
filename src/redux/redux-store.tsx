@@ -3,7 +3,7 @@ import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 
 import {
     deletePostActionType,
-    profileReducer,
+    profileReducer, setPhotosProfileActionType,
     SetUsersProfileActionType,
     SetUsersStatusActionType
 } from "./profile-reducer";
@@ -43,6 +43,7 @@ export type ActionsType =
     | SetUsersStatusActionType
     | SetInitializedAT
     | deletePostActionType
+    | setPhotosProfileActionType
 
 
 export type AddPostActionType = {
@@ -58,30 +59,31 @@ export type SendMessageActionType = {
 
 export type PropsTypeProfile = {
     post: PostDataType[]
-    profile: null | ProfileType
+    profile?: any
     status: string
 }
-
+type ContactsType = {
+    "Facebook": string,
+    "Website": string,
+    "vk": string,
+    "twitter": string,
+    "instagram": string,
+    "youtube": string,
+    "github": string,
+    "mainLink": string
+}
+export type PhotosType = {
+    small: string
+    large: string
+}
 export type ProfileType = {
-    aboutMe: string
-    contacts: {
-        facebook: string
-        website: string
-        vk: string
-        twitter: symbol
-        instagram: string
-        youtube: string
-        github: string
-        mainLink: string
-    },
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
-    photos: {
-        small: string
-        large: string
-    }
+    aboutMe?: string,
+    contacts?: ContactsType,
+    lookingForAJob?: boolean,
+    lookingForAJobDescription?: string,
+    fullName?: string,
+    userId?: number,
+    photos: PhotosType,
 }
 
 export type PropsTypeMessage = {
